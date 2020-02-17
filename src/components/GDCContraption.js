@@ -8,9 +8,9 @@ import { useLoader, useFrame } from 'react-three-fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
 import { apply as applySpring, useSpring, animated as a, interpolate, config } from 'react-spring/three'
-import * as easings from 'd3-ease'
+// import * as easings from 'd3-ease'
 
-export default function JonTest(props) {
+export default function GDCContraption(props) {
   const group = useRef()
   const { nodes, materials, animations } = useLoader(GLTFLoader, 'models/gfc-thing.glb', loader => {
     const dracoLoader = new DRACOLoader()
@@ -18,14 +18,27 @@ export default function JonTest(props) {
     loader.setDRACOLoader(dracoLoader)
   })
 
+  let rotVal = 0;
+
+  if(props.selection === 'goodFast') {
+    rotVal = Math.PI/1.5;
+  } else if(props.selection === 'fastCheap') {
+    rotVal = Math.PI/1.5 * 2;
+  } else if(props.selection === 'cheapGood') {
+    rotVal = Math.PI/1.5 * 3;
+  } 
+
+  let wheelVal = rotVal;
+  let sphereVal = rotVal;
+
   const {rotWheel} = useSpring({
-    rotWheel: props.rot,
+    rotWheel: wheelVal,
     config: { mass: 15, tension: 300, friction: 100 }
     // config: { duration: 1000, easing: easings.easeCubicInOut }
   })
 
   const {rotSphere} = useSpring({
-    rotSphere: props.rot,
+    rotSphere: sphereVal,
     config: { mass: 25, tension: 300, friction: 200 }
     // config: { duration: 2000, easing: easings.easeCubicInOut }
   })
