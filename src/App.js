@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import ThreeTest from './components/ThreeTest';
+import GoodFastCheap from './components/GoodFastCheap';
 
 function App() {
   return (
     <div className="App">
-      <ThreeTest />
+      <GoodFastCheap />
     </div>
   );
 }
