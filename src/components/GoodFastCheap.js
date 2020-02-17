@@ -113,7 +113,8 @@ const Controls = props => {
    return (
      <>
        <div className="bg" />
-       <button style={{position: 'absolute', zIndex: '1'}} onClick={() => setRot(st => st + .7)}>dancing tango monkey pants</button>
+       <button onClick={() => setRot(st => st + Math.PI/1.5)}>+</button>
+       <button onClick={() => setRot(st => st - Math.PI/1.5)}>-</button>
        <Canvas camera={{ position: [0, 0, 15] }} shadowMap pixelRatio={window.devicePixelRatio}>
          <ambientLight intensity={1.5} />
          <pointLight intensity={2} position={[-10, -25, -10]} />
@@ -141,11 +142,7 @@ const Controls = props => {
            minPolarAngle={0}
          />
        </Canvas>
-       <div className="layer" />
-       {/* <Loading /> */}
-       <a href="https://github.com/drcmda/learnwithjason" className="top-left" children="Github" />
-       <a href="https://twitter.com/0xca0a" className="top-right" children="Twitter" />
-       <a href="https://github.com/drcmda/react-three-fiber" className="bottom-left" children="+ react-three-fiber" />
+       
      </>
    )
  }
