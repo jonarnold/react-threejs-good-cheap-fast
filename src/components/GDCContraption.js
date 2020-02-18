@@ -21,11 +21,11 @@ export default function GDCContraption(props) {
   let rotVal = 0;
 
   if(props.selection === 'goodFast') {
-    rotVal = Math.PI/1.5;
-  } else if(props.selection === 'fastCheap') {
-    rotVal = Math.PI/1.5 * 2;
-  } else if(props.selection === 'cheapGood') {
     rotVal = Math.PI/1.5 * 3;
+  } else if(props.selection === 'fastCheap') {
+    rotVal = Math.PI/1.5 * 1;
+  } else if(props.selection === 'cheapGood') {
+    rotVal = Math.PI/1.5 * 2;
   } 
 
   let wheelVal = rotVal;
