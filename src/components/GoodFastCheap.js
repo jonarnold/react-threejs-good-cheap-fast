@@ -23,17 +23,17 @@ const OrbControls = props => {
        {/* <div className="bg" /> */}
        {/* <button onClick={() => setRot(st => st + Math.PI/1.5)}>+</button>
        <button onClick={() => setRot(st => st - Math.PI/1.5)}>-</button> */}
-       <Canvas camera={{ position: [-5, 9, 10] }} shadowMap pixelRatio={window.devicePixelRatio}>
-         <ambientLight intensity={1.5} />
+       <Canvas camera={{ position: [0, 2, 2] }} shadowMap pixelRatio={window.devicePixelRatio}>
+         <ambientLight intensity={5} />
          <pointLight intensity={2} position={[-10, -25, -10]} />
-         <spotLight
+         {/* <spotLight
            castShadow
            intensity={1.25}
            angle={Math.PI / 8}
            position={[25, 25, 15]}
            shadow-mapSize-width={2048}
            shadow-mapSize-height={2048}
-         />
+         /> */}
          {/* <fog attach="fog" args={['#cc7b32', 16, 20]} /> */}
          <Suspense fallback={<RotatingBox />}>
             <GDCContraption selection={selection}/>

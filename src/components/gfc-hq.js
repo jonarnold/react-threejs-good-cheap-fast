@@ -7,59 +7,18 @@ import React, { useEffect, useRef } from 'react'
 import { useLoader, useFrame } from 'react-three-fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
-import { apply as applySpring, useSpring, animated as a, interpolate, config } from 'react-spring/three'
-// import * as easings from 'd3-ease'
 
-export default function GDCContraption(props) {
+export default function Model(props) {
   const group = useRef()
-  const { nodes, materials, animations } = useLoader(GLTFLoader, 'models/gfc-hq.glb', loader => {
+  const { nodes, materials, animations } = useLoader(GLTFLoader, '/gfc-hq.glb', loader => {
     const dracoLoader = new DRACOLoader()
     dracoLoader.setDecoderPath('/draco-gltf/')
     loader.setDRACOLoader(dracoLoader)
   })
 
-  let rotVal = 0;
-
-  if(props.selection === 'goodFast') {
-    rotVal = Math.PI/1.5 * 3;
-  } else if(props.selection === 'fastCheap') {
-    rotVal = Math.PI/1.5 * 1;
-  } else if(props.selection === 'cheapGood') {
-    rotVal = Math.PI/1.5 * 2;
-  } 
-
-  let wheelVal = rotVal;
-  let sphereVal = rotVal;
-
-  const {rotWheel} = useSpring({
-    rotWheel: wheelVal,
-    config: { mass: 15, tension: 300, friction: 100 }
-    // config: { duration: 1000, easing: easings.easeCubicInOut }
-  })
-
-  const {rotSphere} = useSpring({
-    rotSphere: sphereVal,
-    config: { mass: 25, tension: 300, friction: 200 }
-    // config: { duration: 2000, easing: easings.easeCubicInOut }
-  })
-
-  // return (
-  //   <group ref={group} {...props} dispose={null}>
-  //     <a.mesh
-  //       material={materials['phong1.001']}
-  //       geometry={nodes.base.geometry}
-  //       position={[0, 0, 0]}
-  //       rotation={[Math.PI / 2, 0, 0]}
-  //       scale={[0.2, 0.2, 0.2]}>
-  //       <a.mesh rotation={rotSphere.interpolate(r => [0, 0, r])} material={materials['phong1.001']} geometry={nodes.sphere.geometry} position={[0.01, 4.91, -27.29]}  />
-  //       <a.mesh rotation={rotWheel.interpolate(r => [0, r, 0])} material={materials['phong1.001']} geometry={nodes.wheel.geometry} position={[0.01, 7.5, -27.29]} />
-  //     </a.mesh>
-  //   </group>
-  // )
-
   return (
     <group ref={group} {...props} dispose={null}>
-      <mesh material={materials['Metal colors']} geometry={nodes.casing.geometry} position={[0.01, 4, 0]}>
+      <mesh material={materials['Metal colors']} geometry={nodes.casing.geometry} position={[0.01, 2.14, 0]}>
         <mesh material={materials['Metal colors']} geometry={nodes.arm1.geometry} position={[-0.01, -0.14, 0]}>
           <mesh
             material={materials['Interactive elements']}
