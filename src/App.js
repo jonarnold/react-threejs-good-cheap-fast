@@ -17,8 +17,8 @@ export default function App() {
       concurrent
       noEvents={active}
       pixelRatio={window.devicePixelRatio}
-      camera={{ position: [0, 0, 6.5] }}
-      gl={{ antialias: false }}
+      camera={{ position: [0, 0, 2] }}
+      gl={{ antialias: true }}
       onCreated={({ gl, scene }) => {
         gl.toneMapping = THREE.ACESFilmicToneMapping
         gl.outputEncoding = THREE.sRGBEncoding
@@ -29,7 +29,7 @@ export default function App() {
       <Suspense fallback={<Dom center>loading...</Dom>}>
         <Environment />
         {/* <Sphere position={[-2, 0, -1]} /> */}
-        <Suzanne position={[0, 0, 0]} rotation={[0, -0.8, 0]} />
+        <Suzanne position={[0, .1, 0]} rotation={[0, -1, 0]} />
         <Effects />
       </Suspense>
     </Canvas>
