@@ -7,6 +7,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { useLoader, useFrame } from 'react-three-fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
+import { apply as applySpring, useSpring, animated as a, interpolate, config } from 'react-spring/three'
 import propellerImg from '../images/propeller.png'
 
 export default function GFCMachine(props) {
@@ -64,6 +65,22 @@ export default function GFCMachine(props) {
   }
 
   // useFrame(({ clock }) => (group.current.rotation.y = Math.sin(clock.getElapsedTime() / 8) * Math.PI))
+  // let posVal = 0;
+  const {buttonPos1} = useSpring({
+    buttonPos1: isActive('good') ? -.06 : .06,
+    config: { duration: 100 }
+  })
+
+  const {buttonPos2} = useSpring({
+    buttonPos2: isActive('fast') ? -.06 : .06,
+    config: { duration: 100 }
+  })
+
+  const {buttonPos3} = useSpring({
+    buttonPos3: isActive('cheap') ? -.06 : .06,
+    config: { duration: 100 }
+  })
+
 
   return (
     <group ref={group} {...props} dispose={null}>
@@ -72,18 +89,27 @@ export default function GFCMachine(props) {
         <mesh ref={arrow2} material={materials['gfc main']} geometry={nodes.arrow2.geometry} position={[0.38, 0.06, -0.35]} />
         <mesh ref={arrow3} material={materials['gfc main']} geometry={nodes.arrow3.geometry} position={[0.38, -0.54, 0]} />
 
-        <mesh material={materials['gfc main']} geometry={nodes.button1.geometry} position={[isActive('good') ? -.06 : .06, 0.33, 0.83]} 
+        <a.mesh 
+          material={materials['gfc main']} 
+          geometry={nodes.button1.geometry} 
+          position={buttonPos1.interpolate(p => [p, 0.33, 0.83])} 
           onPointerOver={() => set(true)} 
           onPointerOut={() => set(false)}
           onClick={() => handleClick('good')}
         />
-        <mesh material={materials['gfc main']} geometry={nodes.button2.geometry} position={[isActive('fast') ? -.06 : .06, 0.33, -0.82]}
+        <a.mesh 
+          material={materials['gfc main']} 
+          geometry={nodes.button2.geometry} 
+          position={buttonPos2.interpolate(p => [p, 0.33, -0.82])}
           onPointerOver={() => set(true)} 
           onPointerOut={() => set(false)}
           onClick={() => handleClick('fast')}
         />
         />
-        <mesh material={materials['gfc main']} geometry={nodes.button3.geometry} position={[isActive('cheap') ? -.06 : .06, -1.09, 0]} 
+        <a.mesh 
+          material={materials['gfc main']} 
+          geometry={nodes.button3.geometry} 
+          position={buttonPos3.interpolate(p => [p, -1.09, 0])} 
           onPointerOver={() => set(true)} 
           onPointerOut={() => set(false)}
           onClick={() => handleClick('cheap')}
