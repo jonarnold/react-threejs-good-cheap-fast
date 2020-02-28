@@ -4,8 +4,7 @@ import { Canvas, Dom } from 'react-three-fiber'
 import Controls from './components/Controls'
 import Lights from './components/Lights'
 import Environment from './components/Environment'
-import Suzanne from './components/Suzanne'
-import Sphere from './components/Sphere'
+import GFCMachine from './components/GFCMachine'
 import Effects from './components/Effects'
 import './styles.css'
 
@@ -28,8 +27,7 @@ export default function App() {
       <Controls disable={set} />
       <Suspense fallback={<Dom center>loading...</Dom>}>
         <Environment />
-        {/* <Sphere position={[-2, 0, -1]} /> */}
-        <Suzanne position={[0, .1, 0]} rotation={[0, -1, 0]} />
+        <GFCMachine position={[0, .1, 0]} rotation={[0, -1, 0]} />
         <Effects />
       </Suspense>
     </Canvas>
