@@ -17,7 +17,9 @@ export default function GFCMachine(props) {
     loader.setDRACOLoader(dracoLoader)
   })
 
-  // const propellerTex = useLoader(THREE.TextureLoader, '/propeller.png')
+  const [hovered, set] = useState(false);
+  useEffect(() => void (document.body.style.cursor = hovered ? 'pointer' : 'auto'), [hovered])
+
   const [propellerTex] = useLoader(THREE.TextureLoader, [propellerImg])
 
   const propeller = useRef();
@@ -29,12 +31,39 @@ export default function GFCMachine(props) {
   const arrow2 = useRef();
   const arrow3 = useRef();
   const sphere = useRef();
-  useFrame( () => (
-    arrow1.current.rotation.x += .04,
-    arrow2.current.rotation.x += .04,
-    arrow3.current.rotation.x += .04,
-    sphere.current.rotation.y += .0134
-  ))
+
+  // useFrame( () => (
+  //   arrow1.current.rotation.x += .04,
+  //   arrow2.current.rotation.x += .04,
+  //   arrow3.current.rotation.x += .04,
+  //   sphere.current.rotation.y += .0134
+  // ))
+
+  const handleClick = (id) => {
+    props.setNewSelection(id);
+  }
+  
+  // useEffect(() => {
+  //   console.log('updated selections', props.selections);
+  // }, [props])
+
+  
+  const isActive = (selection) => {
+    return props.selections.includes(selection)
+    
+    // if(props.selections.every(s => s !== 'selection')) {
+    //     setSelections('fastCheap');
+    //     return true;
+    // } else if(props.selections.every(s => s !== 'fast')) {
+    //     setSelections('cheapGood');
+    //     console.log('slow!');
+    // } else if(props.selections.every(s => s !== 'cheap')) {
+    //     setSelections('goodFast');
+    //     console.log('$$ af!');
+    // }
+  }
+
+  // useFrame(({ clock }) => (group.current.rotation.y = Math.sin(clock.getElapsedTime() / 8) * Math.PI))
 
   return (
     <group ref={group} {...props} dispose={null}>
@@ -43,29 +72,43 @@ export default function GFCMachine(props) {
         <mesh ref={arrow2} material={materials['gfc main']} geometry={nodes.arrow2.geometry} position={[0.38, 0.06, -0.35]} />
         <mesh ref={arrow3} material={materials['gfc main']} geometry={nodes.arrow3.geometry} position={[0.38, -0.54, 0]} />
 
-        <mesh material={materials['gfc main']} geometry={nodes.button1.geometry} position={[0.06, 0.33, 0.83]} />
-        <mesh material={materials['gfc main']} geometry={nodes.button2.geometry} position={[0.06, 0.33, -0.82]} />
-        <mesh material={materials['gfc main']} geometry={nodes.button3.geometry} position={[0.06, -1.09, 0]} />
+        <mesh material={materials['gfc main']} geometry={nodes.button1.geometry} position={[isActive('good') ? -.06 : .06, 0.33, 0.83]} 
+          onPointerOver={() => set(true)} 
+          onPointerOut={() => set(false)}
+          onClick={() => handleClick('good')}
+        />
+        <mesh material={materials['gfc main']} geometry={nodes.button2.geometry} position={[isActive('fast') ? -.06 : .06, 0.33, -0.82]}
+          onPointerOver={() => set(true)} 
+          onPointerOut={() => set(false)}
+          onClick={() => handleClick('fast')}
+        />
+        />
+        <mesh material={materials['gfc main']} geometry={nodes.button3.geometry} position={[isActive('cheap') ? -.06 : .06, -1.09, 0]} 
+          onPointerOver={() => set(true)} 
+          onPointerOut={() => set(false)}
+          onClick={() => handleClick('cheap')}
+        /> 
+        />
 
         <mesh material={nodes.light1.material} geometry={nodes.light1.geometry}>
           <meshPhongMaterial 
             attach = "material" 
             emissive = {new THREE.Color('#00ff00')}
-            emissiveIntensity = {50}
+            emissiveIntensity = {isActive('good') ? 50 : 0}
           />
         </mesh>
         <mesh material={nodes.light2.material} geometry={nodes.light2.geometry}>
           <meshPhongMaterial 
             attach = "material" 
             emissive = {new THREE.Color('#00ff00')}
-            emissiveIntensity = {50}
+            emissiveIntensity = {isActive('fast') ? 50 : 0}
           />
         </mesh>
         <mesh material={nodes.light3.material} geometry={nodes.light3.geometry}>
           <meshPhongMaterial 
             attach = "material" 
             emissive = {new THREE.Color('#00ff00')}
-            emissiveIntensity = {50}
+            emissiveIntensity = {isActive('cheap') ? 50 : 0}
           />
         </mesh>
 

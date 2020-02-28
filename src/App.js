@@ -11,6 +11,22 @@ import './styles.css'
 export default function App() {
   // Controls disable pointerevents on movement to save some CPU cost
   const [active, set] = useState(false)
+  const [selections, setSelections] = React.useState(['good', 'cheap'])
+
+  const setNewSelection = (id) => {
+    
+    //only update if this is a new value
+    if(selections.includes(id)){
+      return;
+    } 
+
+    //keep last selection, make it first
+    let updatedSelections = selections.slice(1, 2);
+
+    //add new last selection
+    setSelections(updatedSelections.concat([id]));
+  }
+
   return (
     <Canvas
       concurrent
@@ -21,13 +37,13 @@ export default function App() {
       onCreated={({ gl, scene }) => {
         gl.toneMapping = THREE.ACESFilmicToneMapping
         gl.outputEncoding = THREE.sRGBEncoding
-        scene.background = new THREE.Color('#373737')
+        scene.background = new THREE.Color('#373740')
       }}>
       {/* <Lights /> */}
       <Controls disable={set} />
       <Suspense fallback={<Dom center>loading...</Dom>}>
         <Environment />
-        <GFCMachine position={[0, .1, 0]} rotation={[0, -1, 0]} />
+        <GFCMachine selections={selections} setNewSelection={setNewSelection} position={[0, .1, 0]} rotation={[0, -1, 0]} />
         <Effects />
       </Suspense>
     </Canvas>
