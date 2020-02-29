@@ -14,15 +14,12 @@ export default function App() {
   const [selections, setSelections] = React.useState(['good', 'cheap'])
 
   const setNewSelection = (id) => {
-    
     //only update if this is a new value
     if(selections.includes(id)){
       return;
     } 
-
     //keep last selection, make it first
     let updatedSelections = selections.slice(1, 2);
-
     //add new last selection
     setSelections(updatedSelections.concat([id]));
   }

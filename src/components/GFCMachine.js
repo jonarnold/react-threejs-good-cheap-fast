@@ -28,38 +28,26 @@ export default function GFCMachine(props) {
     propeller.current.rotation.y += .4
   ))
 
-  // const arrow1 = useRef();
-  // const arrow2 = useRef();
-  // const arrow3 = useRef();
-  // const sphere = useRef();
-
-
   const handleClick = (id) => {
     props.setNewSelection(id);
   }
   
-  // useEffect(() => {
-  //   console.log('updated selections', props.selections);
-  // }, [props])
-
-  
   const isActive = (selection) => {
     return props.selections.includes(selection)
-    
-    // if(props.selections.every(s => s !== 'selection')) {
-    //     setSelections('fastCheap');
-    //     return true;
-    // } else if(props.selections.every(s => s !== 'fast')) {
-    //     setSelections('cheapGood');
-    //     console.log('slow!');
-    // } else if(props.selections.every(s => s !== 'cheap')) {
-    //     setSelections('goodFast');
-    //     console.log('$$ af!');
-    // }
+  }
+
+  const sphereRotVal = () => {
+    if(props.selections.every(s => s !== 'good')) {
+        return Math.PI/1.5;
+    } else if(props.selections.every(s => s !== 'fast')) {
+        return 0;
+    } else if(props.selections.every(s => s !== 'cheap')) {
+        return -Math.PI/1.5;
+    }
   }
 
   // useFrame(({ clock }) => (group.current.rotation.y = Math.sin(clock.getElapsedTime() / 8) * Math.PI))
-  // let posVal = 0;
+  
   const {buttonPos1, buttonPos2, buttonPos3} = useSpring({
     buttonPos1: isActive('good') ? -.06 : .06,
     buttonPos2: isActive('fast') ? -.06 : .06,
@@ -75,8 +63,8 @@ export default function GFCMachine(props) {
   })
 
   const {sphereRot} = useSpring({
-    sphereRot: isActive('good') ? Math.PI/1.5 : 0,
-    config: { mass: 25, tension: 300, friction: 200 }
+    sphereRot: sphereRotVal(),
+    config: { mass: 25, tension: 500, friction: 200 }
   })
 
 
@@ -84,21 +72,18 @@ export default function GFCMachine(props) {
     <group ref={group} {...props} dispose={null}>
       <mesh material={materials['gfc main']} geometry={nodes.casing.geometry} position={[0, 0, 0]}>
         <a.mesh 
-          // ref={arrow1} 
           material={materials['gfc main']} 
           geometry={nodes.arrow1.geometry} 
           position={[0.38, 0.06, 0.35]} 
           rotation={arrowRot1.interpolate(r => [r, 0, 0])}
         />
         <a.mesh 
-          // ref={arrow2} 
           material={materials['gfc main']} 
           geometry={nodes.arrow2.geometry} 
           position={[0.38, 0.06, -0.35]} 
           rotation={arrowRot2.interpolate(r => [r, 0, 0])}
         />
         <a.mesh 
-          // ref={arrow3} 
           material={materials['gfc main']} 
           geometry={nodes.arrow3.geometry} 
           position={[0.38, -0.54, 0]} 
@@ -157,7 +142,6 @@ export default function GFCMachine(props) {
           geometry={nodes.sphere.geometry} 
           position={[0.18, -0.14, 0]} 
           rotation={sphereRot.interpolate(r => [0, r, 0])}
-          // rotation={[0, 10, 0]}
         />
         
         <group ref={propeller} position={[-0.01, 0.86, 0]}>
@@ -175,37 +159,3 @@ export default function GFCMachine(props) {
     </group>
   )
 }
-
-// export default function Sphere(props) {
-//   const texture = useLoader(THREE.TextureLoader, '/flakes.png')
-//   const normalMap = useMemo(() => {
-//     const clone = texture.clone(true)
-//     clone.needsUpdate = true
-//     return clone
-//   }, [texture])
-//   const [hovered, set] = useState(false)
-//   useEffect(() => void (document.body.style.cursor = hovered ? 'pointer' : 'auto'), [hovered])
-//   return (
-//     <group {...props}>
-//       <mesh onPointerOver={() => set(true)} onPointerOut={() => set(false)}>
-//         <sphereBufferGeometry attach="geometry" args={[1.5, 64, 64]} />
-//         <meshPhysicalMaterial
-//           attach="material"
-//           clearcoat={1.0}
-//           clearcoatRoughness={0}
-//           metalness={0.9}
-//           roughness={0.1}
-//           color={hovered ? 'red' : 'blue'}
-//           normalMap={normalMap}
-//           normalScale={[0.3, 0.3]}
-//           normalMap-wrapS={THREE.RepeatWrapping}
-//           normalMap-wrapT={THREE.RepeatWrapping}
-//           normalMap-repeat={[20, 20]}
-//           //normalMap-anisotropy={16}
-//         />
-//       </mesh>
-//       <Shadow position={[0, -1.5, 0]} scale={[4, 4, 1]} rotation={[-Math.PI / 2, 0, 0]} />
-//     </group>
-//   )
-// }
-
