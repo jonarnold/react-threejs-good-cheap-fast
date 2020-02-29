@@ -24,8 +24,11 @@ export default function GFCMachine(props) {
   const [propellerTex] = useLoader(THREE.TextureLoader, [propellerImg])
 
   const propeller = useRef();
-  useFrame( () => (
-    propeller.current.rotation.y += .4
+  useFrame( ({ clock }) => (
+    propeller.current.rotation.y += .4,
+    group.current.position.y = Math.sin(clock.getElapsedTime() * 1.1) * .057 + 0.1,
+    group.current.position.x = Math.sin(clock.getElapsedTime() * 1.5) * .05,
+    group.current.rotation.y = Math.sin(clock.getElapsedTime() * .25) * .3 -1.5
   ))
 
   const handleClick = (id) => {
@@ -46,7 +49,9 @@ export default function GFCMachine(props) {
     }
   }
 
-  // useFrame(({ clock }) => (group.current.rotation.y = Math.sin(clock.getElapsedTime() / 8) * Math.PI))
+
+
+  //useFrame(({ clock }) => (group.current.rotation.y = Math.sin(clock.getElapsedTime() / 8) * Math.PI))
   
   const {buttonPos1, buttonPos2, buttonPos3} = useSpring({
     buttonPos1: isActive('good') ? -.06 : .06,
@@ -67,9 +72,14 @@ export default function GFCMachine(props) {
     config: { mass: 25, tension: 500, friction: 200 }
   })
 
+  // const {mainRot} = useSpring({
+  //   mainRot: 0
+  //   // config: { mass: 25, tension: 500, friction: 200 }
+  // })
+  //rotation={mainRot.interpolate(r => [r, r-1.2, r])}
 
   return (
-    <group ref={group} {...props} dispose={null}>
+    <a.group ref={group} {...props} dispose={null} >
       <mesh material={materials['gfc main']} geometry={nodes.casing.geometry} position={[0, 0, 0]}>
         <a.mesh 
           material={materials['gfc main']} 
@@ -89,7 +99,6 @@ export default function GFCMachine(props) {
           position={[0.38, -0.54, 0]} 
           rotation={arrowRot3.interpolate(r => [r, 0, 0])}
         />
-
         <a.mesh 
           material={materials['gfc main']} 
           geometry={nodes.button1.geometry} 
@@ -159,6 +168,6 @@ export default function GFCMachine(props) {
           </mesh>
         </group>
       </mesh>
-    </group>
+    </a.group>
   )
 }

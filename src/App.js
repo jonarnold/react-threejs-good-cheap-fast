@@ -39,7 +39,7 @@ export default function App() {
       <Controls disable={set} />
       <Suspense fallback={<Dom center>loading...</Dom>}>
         <Environment />
-        <GFCMachine selections={selections} setNewSelection={setNewSelection} position={[0, .1, 0]} rotation={[0, -1, 0]} />
+        <GFCMachine selections={selections} setNewSelection={setNewSelection} position={[0, .1, 0]} rotation={[0, -1.3, 0]} />
         <Effects />
       </Suspense>
     </Canvas>
