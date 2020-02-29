@@ -15,10 +15,10 @@ export default function Environment({ background = false }) {
     const hdrCubeRenderTarget = gen.fromCubemap(cubeMap)
     cubeMap.dispose()
     gen.dispose()
-    if (background) scene.background = hdrCubeRenderTarget.texture
+    // if (background) scene.background = hdrCubeRenderTarget.texture
     scene.environment = hdrCubeRenderTarget.texture
-    scene.background.convertSRGBToLinear()
-    return () => (scene.environment = scene.background = null)
+    // scene.background.convertSRGBToLinear()
+    return () => (scene.environment = null)
   }, [cubeMap])
   return null
 }

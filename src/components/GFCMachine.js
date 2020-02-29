@@ -117,7 +117,8 @@ export default function GFCMachine(props) {
 
         <mesh material={nodes.light1.material} geometry={nodes.light1.geometry}>
           <meshPhongMaterial 
-            attach = "material" 
+            attach = "material"
+            color = {new THREE.Color('#010201')}
             emissive = {new THREE.Color('#00ff00')}
             emissiveIntensity = {isActive('good') ? 50 : 0}
           />
@@ -125,6 +126,7 @@ export default function GFCMachine(props) {
         <mesh material={nodes.light2.material} geometry={nodes.light2.geometry}>
           <meshPhongMaterial 
             attach = "material" 
+            color = {new THREE.Color('#010201')}
             emissive = {new THREE.Color('#00ff00')}
             emissiveIntensity = {isActive('fast') ? 50 : 0}
           />
@@ -132,6 +134,7 @@ export default function GFCMachine(props) {
         <mesh material={nodes.light3.material} geometry={nodes.light3.geometry}>
           <meshPhongMaterial 
             attach = "material" 
+            color = {new THREE.Color('#010201')}
             emissive = {new THREE.Color('#00ff00')}
             emissiveIntensity = {isActive('cheap') ? 50 : 0}
           />

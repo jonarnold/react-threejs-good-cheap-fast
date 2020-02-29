@@ -2,7 +2,6 @@ import * as THREE from 'three'
 import React, { Suspense, useState } from 'react'
 import { Canvas, Dom } from 'react-three-fiber'
 import Controls from './components/Controls'
-import Lights from './components/Lights'
 import Environment from './components/Environment'
 import GFCMachine from './components/GFCMachine'
 import Effects from './components/Effects'
@@ -34,9 +33,9 @@ export default function App() {
       onCreated={({ gl, scene }) => {
         gl.toneMapping = THREE.ACESFilmicToneMapping
         gl.outputEncoding = THREE.sRGBEncoding
-        scene.background = new THREE.Color('#373740')
+        // scene.background = new THREE.Color('#373740')
       }}>
-      {/* <Lights /> */}
+      <ambientLight intensity={0.2}/>
       <Controls disable={set} />
       <Suspense fallback={<Dom center>loading...</Dom>}>
         <Environment />

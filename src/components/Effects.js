@@ -31,8 +31,8 @@ export default function Effects() {
     const bloom = new BloomEffect({
       blendFunction: BlendFunction.ADD,
       kernelSize: KernelSize.HUGE,
-      luminanceThreshold: 0.7,
-      height: 600
+      luminanceThreshold: 0.6,
+      height: 750
     })
     bloom.blendMode.opacity.value = 2
     //const effectPass = new EffectPass(camera, gammaCorrection, smaaEffect, bloom)
