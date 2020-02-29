@@ -35,7 +35,7 @@ export default function App() {
         gl.outputEncoding = THREE.sRGBEncoding
         // scene.background = new THREE.Color('#373740')
       }}>
-      <ambientLight intensity={0.2}/>
+      <ambientLight intensity={0.33}/>
       <Controls disable={set} />
       <Suspense fallback={<Dom center>loading...</Dom>}>
         <Environment />

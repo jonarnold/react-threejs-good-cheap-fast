@@ -106,7 +106,7 @@ export default function GFCMachine(props) {
           position={buttonPos1.interpolate(p => [p, 0.33, 0.83])} 
           onPointerOver={() => set(true)} 
           onPointerOut={() => set(false)}
-          onClick={() => handleClick('good')}
+          onPointerDown={() => handleClick('good')}
         />
         <a.mesh 
           material={materials['gfc main']} 
@@ -114,7 +114,7 @@ export default function GFCMachine(props) {
           position={buttonPos2.interpolate(p => [p, 0.33, -0.82])}
           onPointerOver={() => set(true)} 
           onPointerOut={() => set(false)}
-          onClick={() => handleClick('fast')}
+          onPointerDown={() => handleClick('fast')}
         />
         <a.mesh 
           material={materials['gfc main']} 
@@ -122,7 +122,7 @@ export default function GFCMachine(props) {
           position={buttonPos3.interpolate(p => [p, -1.09, 0])} 
           onPointerOver={() => set(true)} 
           onPointerOut={() => set(false)}
-          onClick={() => handleClick('cheap')}
+          onPointerDown={() => handleClick('cheap')}
         />
 
         <mesh material={nodes.light1.material} geometry={nodes.light1.geometry}>
