@@ -28,7 +28,7 @@ export default function App() {
       concurrent
       noEvents={active}
       pixelRatio={window.devicePixelRatio}
-      camera={{ position: [0, 0, 2] }}
+      camera={{ position: [0, 0, 2.5], fov: 65 }}
       gl={{ antialias: true }}
       onCreated={({ gl, scene }) => {
         gl.toneMapping = THREE.ACESFilmicToneMapping

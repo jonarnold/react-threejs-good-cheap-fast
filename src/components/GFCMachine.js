@@ -28,7 +28,8 @@ export default function GFCMachine(props) {
     propeller.current.rotation.y += .4,
     group.current.position.y = Math.sin(clock.getElapsedTime() * 1.1) * .057 + 0.1,
     group.current.position.x = Math.sin(clock.getElapsedTime() * 1.5) * .05,
-    group.current.rotation.y = Math.sin(clock.getElapsedTime() * .25) * .3 -1.5
+    group.current.position.z = Math.sin(clock.getElapsedTime() * 1.3) * .05,
+    group.current.rotation.y = Math.sin(clock.getElapsedTime() * .25) * .2 -1.5
   ))
 
   const handleClick = (id) => {
