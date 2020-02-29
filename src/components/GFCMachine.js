@@ -28,17 +28,11 @@ export default function GFCMachine(props) {
     propeller.current.rotation.y += .4
   ))
 
-  const arrow1 = useRef();
-  const arrow2 = useRef();
-  const arrow3 = useRef();
-  const sphere = useRef();
+  // const arrow1 = useRef();
+  // const arrow2 = useRef();
+  // const arrow3 = useRef();
+  // const sphere = useRef();
 
-  // useFrame( () => (
-  //   arrow1.current.rotation.x += .04,
-  //   arrow2.current.rotation.x += .04,
-  //   arrow3.current.rotation.x += .04,
-  //   sphere.current.rotation.y += .0134
-  // ))
 
   const handleClick = (id) => {
     props.setNewSelection(id);
@@ -66,28 +60,50 @@ export default function GFCMachine(props) {
 
   // useFrame(({ clock }) => (group.current.rotation.y = Math.sin(clock.getElapsedTime() / 8) * Math.PI))
   // let posVal = 0;
-  const {buttonPos1} = useSpring({
+  const {buttonPos1, buttonPos2, buttonPos3} = useSpring({
     buttonPos1: isActive('good') ? -.06 : .06,
-    config: { duration: 100 }
-  })
-
-  const {buttonPos2} = useSpring({
     buttonPos2: isActive('fast') ? -.06 : .06,
-    config: { duration: 100 }
+    buttonPos3: isActive('cheap') ? -.06 : .06,
+    config: { duration: 150 }
   })
 
-  const {buttonPos3} = useSpring({
-    buttonPos3: isActive('cheap') ? -.06 : .06,
-    config: { duration: 100 }
+  const {arrowRot1, arrowRot2, arrowRot3} = useSpring({
+    arrowRot1: isActive('good') ? Math.PI : 0,
+    arrowRot2: isActive('fast') ? Math.PI : 0,
+    arrowRot3: isActive('cheap') ? Math.PI : 0,
+    config: { mass: 1, tension: 120, friction: 14 }
+  })
+
+  const {sphereRot} = useSpring({
+    sphereRot: isActive('good') ? Math.PI/1.5 : 0,
+    config: { mass: 25, tension: 300, friction: 200 }
   })
 
 
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh material={materials['gfc main']} geometry={nodes.casing.geometry} position={[0, 0, 0]}>
-        <mesh ref={arrow1} material={materials['gfc main']} geometry={nodes.arrow1.geometry} position={[0.38, 0.06, 0.35]} />
-        <mesh ref={arrow2} material={materials['gfc main']} geometry={nodes.arrow2.geometry} position={[0.38, 0.06, -0.35]} />
-        <mesh ref={arrow3} material={materials['gfc main']} geometry={nodes.arrow3.geometry} position={[0.38, -0.54, 0]} />
+        <a.mesh 
+          // ref={arrow1} 
+          material={materials['gfc main']} 
+          geometry={nodes.arrow1.geometry} 
+          position={[0.38, 0.06, 0.35]} 
+          rotation={arrowRot1.interpolate(r => [r, 0, 0])}
+        />
+        <a.mesh 
+          // ref={arrow2} 
+          material={materials['gfc main']} 
+          geometry={nodes.arrow2.geometry} 
+          position={[0.38, 0.06, -0.35]} 
+          rotation={arrowRot2.interpolate(r => [r, 0, 0])}
+        />
+        <a.mesh 
+          // ref={arrow3} 
+          material={materials['gfc main']} 
+          geometry={nodes.arrow3.geometry} 
+          position={[0.38, -0.54, 0]} 
+          rotation={arrowRot3.interpolate(r => [r, 0, 0])}
+        />
 
         <a.mesh 
           material={materials['gfc main']} 
@@ -105,7 +121,6 @@ export default function GFCMachine(props) {
           onPointerOut={() => set(false)}
           onClick={() => handleClick('fast')}
         />
-        />
         <a.mesh 
           material={materials['gfc main']} 
           geometry={nodes.button3.geometry} 
@@ -113,7 +128,6 @@ export default function GFCMachine(props) {
           onPointerOver={() => set(true)} 
           onPointerOut={() => set(false)}
           onClick={() => handleClick('cheap')}
-        /> 
         />
 
         <mesh material={nodes.light1.material} geometry={nodes.light1.geometry}>
@@ -138,7 +152,13 @@ export default function GFCMachine(props) {
           />
         </mesh>
 
-        <mesh ref={sphere} material={materials['gfc main']} geometry={nodes.sphere.geometry} position={[0.18, -0.14, 0]} />
+        <a.mesh 
+          material={materials['gfc main']} 
+          geometry={nodes.sphere.geometry} 
+          position={[0.18, -0.14, 0]} 
+          rotation={sphereRot.interpolate(r => [0, r, 0])}
+          // rotation={[0, 10, 0]}
+        />
         
         <group ref={propeller} position={[-0.01, 0.86, 0]}>
           <mesh material={materials['gfc main']} geometry={nodes.propeller_0.geometry} />
