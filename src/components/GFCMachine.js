@@ -10,6 +10,64 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
 import { useSpring, animated as a, interpolate, config } from 'react-spring/three'
 import propellerImg from '../images/propeller.png'
 
+
+import propellerAudio from '../audio/propeller.ogg';
+import buttonAudio from '../audio/button-click.mp3';
+import servo1Audio from '../audio/servo1.mp3';
+import servo2Audio from '../audio/servo2.mp3';
+import servo3Audio from '../audio/servo3.mp3';
+import squeak1Audio from '../audio/squeak1.mp3';
+import squeak2Audio from '../audio/squeak2.mp3';
+import squeak3Audio from '../audio/squeak3.mp3';
+const propellerSound = new Audio(propellerAudio);
+const buttonSound = new Audio(buttonAudio);
+const servo1Sound = new Audio(servo1Audio);
+const servo2Sound = new Audio(servo2Audio);
+const servo3Sound = new Audio(servo3Audio);
+const squeak1Sound = new Audio(squeak1Audio);
+const squeak2Sound = new Audio(squeak2Audio);
+const squeak3Sound = new Audio(squeak3Audio);
+
+function playAudio(audio, volume = 1, loop = false) {
+    audio.currentTime = 0
+    audio.volume = volume
+    audio.loop = loop
+    audio.play()
+}
+
+playAudio(propellerSound, .35, true);
+
+function playRandomServo() {
+  const vol = .3;
+  const rand = Math.floor(Math.random() * 3) + 1;
+  switch(rand) {
+    case 1:
+      playAudio(servo1Sound, vol, false);
+      return;
+    case 2:
+      playAudio(servo2Sound, vol, false);
+      return;
+    case 3:
+      playAudio(servo3Sound, vol, false);
+  }
+}
+
+function playRandomSqueak() {
+  const vol = .3;
+  const rand = Math.floor(Math.random() * 3) + 1;
+  switch(rand) {
+    case 1:
+      playAudio(squeak1Sound, vol, false);
+      return;
+    case 2:
+      playAudio(squeak2Sound, vol, false);
+      return;
+    case 3:
+      playAudio(squeak3Sound, vol, false);
+  }
+}
+
+
 export default function GFCMachine(props) {
   const group = useRef()
   const { nodes, materials } = useLoader(GLTFLoader, 'gfc-hq.glb', loader => {
@@ -33,6 +91,9 @@ export default function GFCMachine(props) {
   ))
 
   const handleClick = (id) => {
+    playRandomServo();
+    // playRandomSqueak();
+    playAudio(buttonSound, 1, false);
     props.setNewSelection(id);
   }
   
@@ -51,23 +112,6 @@ export default function GFCMachine(props) {
   }
 
 
-
-  // const Sound = ({ url }) => {
-  //   const sound = useRef()
-  //   const { camera } = useThree()
-  //   const [listener] = useState(() => new THREE.AudioListener())
-  //   const buffer = useLoader(THREE.AudioLoader, url)
-  //   useEffect(() => {
-  //     sound.current = new THREE.Audio( listener );
-  //     sound.current.setBuffer(buffer)
-  //     sound.current.setRefDistance(1)
-  //     sound.current.setLoop(true)
-  //     sound.current.play()
-  //     camera.add(listener)
-  //     return () => camera.remove(listener)
-  //   }, [])
-  //   return <audio ref={sound} args={[listener]} />
-  // }
 
 
 
@@ -100,8 +144,9 @@ export default function GFCMachine(props) {
 
   return (
     <a.group ref={group} {...props} dispose={null} >
-      {/* <Sound url="audio/propeller.mp3"/> */}
+      
       <mesh material={materials['gfc main']} geometry={nodes.casing.geometry} position={[0, 0, 0]}>
+      
         <a.mesh 
           material={materials['gfc main']} 
           geometry={nodes.arrow1.geometry} 
