@@ -11,22 +11,48 @@ import { useSpring, animated as a, interpolate, config } from 'react-spring/thre
 import propellerImg from '../images/propeller.png'
 
 
-import propellerAudio from '../audio/propeller.ogg';
+// import propellerAudio from '../audio/propeller.ogg';
 import buttonAudio from '../audio/button-click.mp3';
+import buttonInactiveAudio from '../audio/button-inactive.mp3';
 import servo1Audio from '../audio/servo1.mp3';
 import servo2Audio from '../audio/servo2.mp3';
 import servo3Audio from '../audio/servo3.mp3';
 import squeak1Audio from '../audio/squeak1.mp3';
 import squeak2Audio from '../audio/squeak2.mp3';
 import squeak3Audio from '../audio/squeak3.mp3';
-const propellerSound = new Audio(propellerAudio);
+// import { AudioLoader } from 'three'
+// const propellerSound = new Audio(propellerAudio);
+// const propellerSoundLoader = new AudioLoader();
+// propellerSoundLoader.load( 'audio/propeller.mp3', function( buffer ) {
+// 	propellerSound.buffer( buffer );
+// 	propellerSound.loop( true );
+// 	propellerSound.volume( 0.5 );
+// 	propellerSound.play();
+// });
 const buttonSound = new Audio(buttonAudio);
+const buttonInactiveSound = new Audio(buttonInactiveAudio);
 const servo1Sound = new Audio(servo1Audio);
 const servo2Sound = new Audio(servo2Audio);
 const servo3Sound = new Audio(servo3Audio);
 const squeak1Sound = new Audio(squeak1Audio);
 const squeak2Sound = new Audio(squeak2Audio);
 const squeak3Sound = new Audio(squeak3Audio);
+
+function Sound({ url }) {
+  const sound = useRef()
+  const { camera } = useThree()
+  const [listener] = useState(() => new THREE.AudioListener())
+  const buffer = useLoader(THREE.AudioLoader, url)
+  useEffect(() => {
+    sound.current.setBuffer(buffer)
+    // sound.current.setRefDistance(1)
+    sound.current.setLoop(true)
+    sound.current.play()
+    camera.add(listener)
+    return () => camera.remove(listener)
+  }, [])
+  return <positionalAudio ref={sound} args={[listener]} />
+}
 
 function playAudio(audio, volume = 1, loop = false) {
     audio.currentTime = 0
@@ -35,7 +61,7 @@ function playAudio(audio, volume = 1, loop = false) {
     audio.play()
 }
 
-playAudio(propellerSound, .35, true);
+// playAudio(propellerSound, .35, true);
 
 function playRandomServo() {
   const vol = .3;
@@ -52,20 +78,20 @@ function playRandomServo() {
   }
 }
 
-function playRandomSqueak() {
-  const vol = .3;
-  const rand = Math.floor(Math.random() * 3) + 1;
-  switch(rand) {
-    case 1:
-      playAudio(squeak1Sound, vol, false);
-      return;
-    case 2:
-      playAudio(squeak2Sound, vol, false);
-      return;
-    case 3:
-      playAudio(squeak3Sound, vol, false);
-  }
-}
+// function playRandomSqueak() {
+//   const vol = .3;
+//   const rand = Math.floor(Math.random() * 3) + 1;
+//   switch(rand) {
+//     case 1:
+//       playAudio(squeak1Sound, vol, false);
+//       return;
+//     case 2:
+//       playAudio(squeak2Sound, vol, false);
+//       return;
+//     case 3:
+//       playAudio(squeak3Sound, vol, false);
+//   }
+// }
 
 
 export default function GFCMachine(props) {
@@ -90,10 +116,11 @@ export default function GFCMachine(props) {
     group.current.rotation.y = Math.sin(clock.getElapsedTime() * .25) * .2 -1.5
   ))
 
-  const handleClick = (id) => {
+  const handleClick = (id) => { 
     playRandomServo();
     // playRandomSqueak();
     playAudio(buttonSound, 1, false);
+    // playAudio(buttonInactiveSound, 1, false);
     props.setNewSelection(id);
   }
   
@@ -144,7 +171,7 @@ export default function GFCMachine(props) {
 
   return (
     <a.group ref={group} {...props} dispose={null} >
-      
+      <Sound url="/audio/propeller2.ogg" />
       <mesh material={materials['gfc main']} geometry={nodes.casing.geometry} position={[0, 0, 0]}>
       
         <a.mesh 
