@@ -10,33 +10,17 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
 import { useSpring, animated as a, interpolate, config } from 'react-spring/three'
 import propellerImg from '../images/propeller.png'
 
-
-// import propellerAudio from '../audio/propeller.ogg';
 import buttonAudio from '../audio/button-click.mp3';
 import buttonInactiveAudio from '../audio/button-inactive.mp3';
 import servo1Audio from '../audio/servo1.mp3';
 import servo2Audio from '../audio/servo2.mp3';
 import servo3Audio from '../audio/servo3.mp3';
-import squeak1Audio from '../audio/squeak1.mp3';
-import squeak2Audio from '../audio/squeak2.mp3';
-import squeak3Audio from '../audio/squeak3.mp3';
-// import { AudioLoader } from 'three'
-// const propellerSound = new Audio(propellerAudio);
-// const propellerSoundLoader = new AudioLoader();
-// propellerSoundLoader.load( 'audio/propeller.mp3', function( buffer ) {
-// 	propellerSound.buffer( buffer );
-// 	propellerSound.loop( true );
-// 	propellerSound.volume( 0.5 );
-// 	propellerSound.play();
-// });
+
 const buttonSound = new Audio(buttonAudio);
 const buttonInactiveSound = new Audio(buttonInactiveAudio);
 const servo1Sound = new Audio(servo1Audio);
 const servo2Sound = new Audio(servo2Audio);
 const servo3Sound = new Audio(servo3Audio);
-const squeak1Sound = new Audio(squeak1Audio);
-const squeak2Sound = new Audio(squeak2Audio);
-const squeak3Sound = new Audio(squeak3Audio);
 
 function Sound({ url }) {
   const sound = useRef()
@@ -61,8 +45,6 @@ function playAudio(audio, volume = 1, loop = false) {
     audio.play()
 }
 
-// playAudio(propellerSound, .35, true);
-
 function playRandomServo() {
   const vol = .3;
   const rand = Math.floor(Math.random() * 3) + 1;
@@ -77,22 +59,6 @@ function playRandomServo() {
       playAudio(servo3Sound, vol, false);
   }
 }
-
-// function playRandomSqueak() {
-//   const vol = .3;
-//   const rand = Math.floor(Math.random() * 3) + 1;
-//   switch(rand) {
-//     case 1:
-//       playAudio(squeak1Sound, vol, false);
-//       return;
-//     case 2:
-//       playAudio(squeak2Sound, vol, false);
-//       return;
-//     case 3:
-//       playAudio(squeak3Sound, vol, false);
-//   }
-// }
-
 
 export default function GFCMachine(props) {
   const group = useRef()
@@ -117,11 +83,14 @@ export default function GFCMachine(props) {
   ))
 
   const handleClick = (id) => { 
-    playRandomServo();
-    // playRandomSqueak();
-    playAudio(buttonSound, 1, false);
-    // playAudio(buttonInactiveSound, 1, false);
-    props.setNewSelection(id);
+    if(!isActive(id)){
+      playRandomServo();
+      playAudio(buttonSound, 1, false);
+      props.setNewSelection(id);
+    } else {
+      playAudio(buttonInactiveSound, 1, false);
+    }
+    
   }
   
   const isActive = (selection) => {
@@ -137,10 +106,6 @@ export default function GFCMachine(props) {
         return -Math.PI/1.5;
     }
   }
-
-
-
-
 
   //useFrame(({ clock }) => (group.current.rotation.y = Math.sin(clock.getElapsedTime() / 8) * Math.PI))
   
@@ -162,12 +127,6 @@ export default function GFCMachine(props) {
     sphereRot: sphereRotVal(),
     config: { mass: 25, tension: 500, friction: 200 }
   })
-
-  // const {mainRot} = useSpring({
-  //   mainRot: 0
-  //   // config: { mass: 25, tension: 500, friction: 200 }
-  // })
-  //rotation={mainRot.interpolate(r => [r, r-1.2, r])}
 
   return (
     <a.group ref={group} {...props} dispose={null} >
@@ -195,7 +154,8 @@ export default function GFCMachine(props) {
         <a.mesh 
           material={materials['gfc main']} 
           geometry={nodes.button1.geometry} 
-          position={buttonPos1.interpolate(p => [p, 0.33, 0.83])} 
+          // position={buttonPos1.interpolate(p => [p, 0.33, 0.83])} 
+          position={[0, 0.33, 0.83]} 
           onPointerOver={() => set(true)} 
           onPointerOut={() => set(false)}
           onPointerDown={() => handleClick('good')}
@@ -203,7 +163,8 @@ export default function GFCMachine(props) {
         <a.mesh 
           material={materials['gfc main']} 
           geometry={nodes.button2.geometry} 
-          position={buttonPos2.interpolate(p => [p, 0.33, -0.82])}
+          // position={buttonPos2.interpolate(p => [p, 0.33, -0.82])}
+          position={[0, 0.33, -0.82]}
           onPointerOver={() => set(true)} 
           onPointerOut={() => set(false)}
           onPointerDown={() => handleClick('fast')}
@@ -211,7 +172,8 @@ export default function GFCMachine(props) {
         <a.mesh 
           material={materials['gfc main']} 
           geometry={nodes.button3.geometry} 
-          position={buttonPos3.interpolate(p => [p, -1.09, 0])} 
+          // position={buttonPos3.interpolate(p => [p, -1.09, 0])} 
+          position={[0, -1.09, 0]} 
           onPointerOver={() => set(true)} 
           onPointerOut={() => set(false)}
           onPointerDown={() => handleClick('cheap')}
