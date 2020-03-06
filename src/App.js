@@ -59,7 +59,7 @@ export default function App() {
             <PropellerSound allowSound={allowSound} url="audio/propeller.ogg"/>
           </Suspense>
         </Canvas>
-        <UI allowSound={allowSound} toggleSound={toggleSound}/>
+        <UI selections={selections} allowSound={allowSound} toggleSound={toggleSound}/>
         
       </div>
     </>
