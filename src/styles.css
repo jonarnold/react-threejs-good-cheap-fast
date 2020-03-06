@@ -6,7 +6,7 @@ html,
 body,
 #root {
   width: 100vw;
-  height: 100%;
+  height: 100vh;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -17,4 +17,13 @@ body {
   color: white;
   background: linear-gradient(to bottom, #5f656b 0%,#93989e 67%,#d7dbe0 100%);
   user-select: none;
+}
+canvas {
+  height: 100vh;
+  width: 100vw;
+  outline: none;
+}
+
+div.wrapper-canvas {
+  width: 75%;
 }
