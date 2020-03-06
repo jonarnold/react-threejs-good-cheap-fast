@@ -80,7 +80,9 @@ const PropellerSound = ({ url, allowSound }) => {
       sound.current.play()
       camera.add(listener)
     } else { 
-      sound.current.stop()
+      if(sound.current.isPlaying) {
+        sound.current.stop()
+      }
       camera.remove(listener)
     } 
     return () => camera.remove(listener)

@@ -7,7 +7,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { useLoader, useFrame } from 'react-three-fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
-import { useSpring, animated as a, interpolate, config } from 'react-spring/three'
+import { useSpring, animated as a } from 'react-spring/three'
 import propellerImg from '../images/propeller.png'
 
 import buttonAudio from '../audio/button-click.mp3';
@@ -34,6 +34,7 @@ function playAudio(audio, volume = 1, loop = false) {
 function playRandomServo() {
   const vol = .73;
   const rand = Math.floor(Math.random() * 3) + 1;
+
   switch(rand) {
     case 1:
       playAudio(servo1Sound, vol, false);
@@ -41,7 +42,7 @@ function playRandomServo() {
     case 2:
       playAudio(servo2Sound, vol, false);
       return;
-    case 3:
+    default:
       playAudio(servo3Sound, vol, false);
   }
 }
@@ -60,13 +61,14 @@ export default function GFCMachine(props) {
   const [propellerTex] = useLoader(THREE.TextureLoader, [propellerImg])
 
   const propeller = useRef();
-  useFrame( ({ clock }) => (
-    propeller.current.rotation.y += .4,
-    group.current.position.y = Math.sin(clock.getElapsedTime() * 1.1) * .057 + 0.1,
-    group.current.position.x = Math.sin(clock.getElapsedTime() * 1.5) * .05,
-    group.current.position.z = Math.sin(clock.getElapsedTime() * 1.3) * .05,
-    group.current.rotation.y = Math.sin(clock.getElapsedTime() * .25) * .2 -1.5
-  ))
+  useFrame( ({ clock }) => {
+      propeller.current.rotation.y += .4;
+      group.current.position.y = Math.sin(clock.getElapsedTime() * 1.1) * .057 + 0.1;
+      group.current.position.x = Math.sin(clock.getElapsedTime() * 1.5) * .05;
+      group.current.position.z = Math.sin(clock.getElapsedTime() * 1.3) * .05;
+      group.current.rotation.y = Math.sin(clock.getElapsedTime() * .25) * .2 -1.5;
+    }
+  )
 
   const handleClick = (id) => { 
     if(!isActive(id)){
