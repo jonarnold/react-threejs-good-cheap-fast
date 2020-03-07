@@ -12,7 +12,7 @@ export default function App() {
   // Controls disable pointerevents on movement to save some CPU cost
   const [active, set] = useState(false);
   const [allowSound, setAllowSound] = useState(false);
-  const [selections, setSelections] = React.useState(['good', 'cheap'])
+  const [selections, setSelections] = React.useState([])
 
   const toggleSound = () => {
     setAllowSound(s => !s);
@@ -23,10 +23,17 @@ export default function App() {
     if(selections.includes(id)){
       return;
     } 
-    //keep last selection, make it first
-    let updatedSelections = selections.slice(1, 2);
+
+    let updatedSelections = selections;
+
+    if (selections.length === 2){
+      //keep last selection, make it first
+      updatedSelections = selections.slice(1, 2);
+    }
+
     //add new last selection
     setSelections(updatedSelections.concat([id]));
+    
   }
 
   return (

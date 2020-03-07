@@ -22,8 +22,6 @@ const servo1Sound = new Audio(servo1Audio);
 const servo2Sound = new Audio(servo2Audio);
 const servo3Sound = new Audio(servo3Audio);
 
-
-
 function playAudio(audio, volume = 1, loop = false) {
     audio.currentTime = 0
     audio.volume = volume
@@ -56,13 +54,19 @@ export default function GFCMachine(props) {
   })
 
   const [hovered, set] = useState(false);
-  useEffect(() => void (document.body.style.cursor = hovered ? 'pointer' : 'auto'), [hovered])
+  useEffect(() => void (document.body.style.cursor = hovered ? 'pointer' : 'auto'), [hovered]);
 
   const [propellerTex] = useLoader(THREE.TextureLoader, [propellerImg])
 
   const propeller = useRef();
+  const sphere = useRef(); //only for init spinning
   useFrame( ({ clock }) => {
       propeller.current.rotation.y += .4;
+      
+      // if(sphere.current !== null && props.selections.length < 2) {
+      //   sphere.current.rotation.y += .04;
+      // }
+
       group.current.position.y = Math.sin(clock.getElapsedTime() * 1.1) * .057 + 0.1;
       group.current.position.x = Math.sin(clock.getElapsedTime() * 1.5) * .05;
       group.current.position.z = Math.sin(clock.getElapsedTime() * 1.3) * .05;
@@ -95,8 +99,13 @@ export default function GFCMachine(props) {
         return 0;
     } else if(props.selections.every(s => s !== 'cheap')) {
         return -Math.PI/1.5;
-    }
+    } 
   }
+
+  // const sphereInitRotVal = () => {
+  //   console.log('initrot');
+  //   return Math.random() * 10;
+  // }
 
   //useFrame(({ clock }) => (group.current.rotation.y = Math.sin(clock.getElapsedTime() / 8) * Math.PI))
   
@@ -111,12 +120,12 @@ export default function GFCMachine(props) {
     arrowRot1: isActive('good') ? Math.PI : 0,
     arrowRot2: isActive('fast') ? Math.PI : 0,
     arrowRot3: isActive('cheap') ? Math.PI : 0,
-    config: { mass: 1, tension: 120, friction: 14 }
+    config: { mass: 1, tension: 150, friction: 12 }
   })
 
   const {sphereRot} = useSpring({
-    sphereRot: sphereRotVal(),
-    config: { mass: 25, tension: 500, friction: 200 }
+    to: {sphereRot: sphereRotVal()},
+    from: {sphereRot: 16}
   })
 
   return (
@@ -191,17 +200,28 @@ export default function GFCMachine(props) {
           />
         </mesh>
 
-        <a.mesh 
-          material={materials['gfc main']} 
-          geometry={nodes.sphere.geometry} 
-          position={[0.18, -0.14, 0]} 
-          rotation={sphereRot.interpolate(r => [0, r, 0])}
-        />
+        {/* SPHERE */}
+        {props.selections.length === 2
+         ?
+          <a.mesh ref={sphere}
+            material={materials['gfc main']} 
+            geometry={nodes.sphere.geometry} 
+            position={[0.18, -0.14, 0]}  
+            rotation={sphereRot.interpolate(r => [0, r, 0])}
+          />
+          :
+          <a.mesh ref={sphere}
+            material={materials['gfc main']} 
+            geometry={nodes.sphere.geometry} 
+            position={[0.18, -0.14, 0]}
+          />
+        }
         
+        {/* PROPELLER */}
         <group ref={propeller} position={[-0.01, 0.86, 0]}>
           <mesh material={materials['gfc main']} geometry={nodes.propeller_0.geometry} />
           <mesh geometry = {nodes.propeller_1.geometry}>
-            <meshStandardMaterial 
+            <meshStandardMaterial
               attach="material" 
               map={propellerTex} 
               side={THREE.DoubleSide}
