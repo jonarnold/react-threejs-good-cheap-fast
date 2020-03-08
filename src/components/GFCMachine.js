@@ -63,9 +63,9 @@ export default function GFCMachine(props) {
   useFrame( ({ clock }) => {
       propeller.current.rotation.y += .4;
       
-      // if(sphere.current !== null && props.selections.length < 2) {
-      //   sphere.current.rotation.y += .04;
-      // }
+      if(sphere.current !== null && props.selections.length < 2) {
+        sphere.current.rotation.y += .04;
+      }
 
       group.current.position.y = Math.sin(clock.getElapsedTime() * 1.1) * .057 + 0.1;
       group.current.position.x = Math.sin(clock.getElapsedTime() * 1.5) * .05;
@@ -91,6 +91,23 @@ export default function GFCMachine(props) {
   const isActive = (selection) => {
     return props.selections.includes(selection)
   }
+
+  const initOptions = ['good', 'fast', 'cheap'];
+  const [initLightIdx, setInitLightIdx] = useState(0);
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      console.log(props.selections[0]);
+      const filteredInitOptions = initOptions.filter(i => i !== props.selections[0])
+      setInitLightIdx(idx => (idx + 1) % filteredInitOptions.length);
+    }, 750)
+    return () => window.clearInterval(interval);
+  }, [props])
+
+
+  const isInitActive = (selection) => {
+    return selection === initOptions[initLightIdx]
+  }
+
 
   const sphereRotVal = () => {
     if(props.selections.every(s => s !== 'good')) {
@@ -132,6 +149,8 @@ export default function GFCMachine(props) {
     <a.group ref={group} {...props} dispose={null} > 
       <mesh material={materials['gfc main']} geometry={nodes.casing.geometry} position={[0, 0, 0]}>
 
+
+        {/* ARROWS */}
         <a.mesh 
           material={materials['gfc main']} 
           geometry={nodes.arrow1.geometry} 
@@ -150,6 +169,9 @@ export default function GFCMachine(props) {
           position={[0.38, -0.54, 0]} 
           rotation={arrowRot3.interpolate(r => [r, 0, 0])}
         />
+
+
+        {/* BUTTONS */}
         <a.mesh 
           material={materials['gfc main']} 
           geometry={nodes.button1.geometry} 
@@ -175,12 +197,14 @@ export default function GFCMachine(props) {
           onPointerDown={() => handleClick('cheap')}
         />
 
+
+        {/* LIGHTS */}
         <mesh material={nodes.light1.material} geometry={nodes.light1.geometry}>
           <meshPhongMaterial 
             attach = "material"
             color = {new THREE.Color('#010201')}
             emissive = {new THREE.Color('#00ff00')}
-            emissiveIntensity = {isActive('good') ? 50 : 0}
+            emissiveIntensity = {isActive('good') || isInitActive('good') ? 50 : 0}
           />
         </mesh>
         <mesh material={nodes.light2.material} geometry={nodes.light2.geometry}>
@@ -188,7 +212,7 @@ export default function GFCMachine(props) {
             attach = "material" 
             color = {new THREE.Color('#010201')}
             emissive = {new THREE.Color('#00ff00')}
-            emissiveIntensity = {isActive('fast') ? 50 : 0}
+            emissiveIntensity = {isActive('fast') || isInitActive('fast') ? 50 : 0}
           />
         </mesh>
         <mesh material={nodes.light3.material} geometry={nodes.light3.geometry}>
@@ -196,9 +220,10 @@ export default function GFCMachine(props) {
             attach = "material" 
             color = {new THREE.Color('#010201')}
             emissive = {new THREE.Color('#00ff00')}
-            emissiveIntensity = {isActive('cheap') ? 50 : 0}
+            emissiveIntensity = {isActive('cheap') || isInitActive('cheap') ? 50 : 0}
           />
         </mesh>
+
 
         {/* SPHERE */}
         {props.selections.length === 2
@@ -217,6 +242,7 @@ export default function GFCMachine(props) {
           />
         }
         
+
         {/* PROPELLER */}
         <group ref={propeller} position={[-0.01, 0.86, 0]}>
           <mesh material={materials['gfc main']} geometry={nodes.propeller_0.geometry} />
