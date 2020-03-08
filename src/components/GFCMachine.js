@@ -92,20 +92,29 @@ export default function GFCMachine(props) {
     return props.selections.includes(selection)
   }
 
-  const initOptions = ['good', 'fast', 'cheap'];
-  const [initLightIdx, setInitLightIdx] = useState(0);
+  const [initLights, setInitLights] = useState(['good', 'fast', 'cheap']);
+  const [initLightsIdx, setInitLightsIdx] = useState(0);
+  
   useEffect(() => {
-    const interval = window.setInterval(() => {
-      console.log(props.selections[0]);
-      const filteredInitOptions = initOptions.filter(i => i !== props.selections[0])
-      setInitLightIdx(idx => (idx + 1) % filteredInitOptions.length);
-    }, 750)
+    let interval;
+    window.clearInterval(interval);
+    if(props.selections.length === 2) {
+      window.clearInterval(interval);
+      setInitLights([]);
+    } else {
+      const filteredInitLights = initLights.filter(i => i !== props.selections[0])
+      interval = window.setInterval(() => {
+        setInitLightsIdx(idx => (idx + 1) % filteredInitLights.length);
+      }, 700)
+      setInitLights(filteredInitLights);
+    }
+
     return () => window.clearInterval(interval);
   }, [props])
 
 
   const isInitActive = (selection) => {
-    return selection === initOptions[initLightIdx]
+    return selection === initLights[initLightsIdx]
   }
 
 
