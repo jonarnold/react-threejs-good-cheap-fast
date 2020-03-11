@@ -2,9 +2,9 @@
    position: absolute;
    top: 0;
    left: 0;
-   width: 33%;
+   width: 48%;
    height: 100%;
-   border: solid 1px blue;
+   /* border: solid 1px blue; */
    color: rgba(255, 255, 255, .9);
 }
 

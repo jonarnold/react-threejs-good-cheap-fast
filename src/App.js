@@ -38,6 +38,7 @@ export default function App() {
 
   return (
     <div className="App">
+      <UI selections={selections} allowSound={allowSound} toggleSound={toggleSound}/>
       <div className="App__canvas">
         <Canvas
           concurrent
@@ -68,7 +69,6 @@ export default function App() {
         </Canvas>
         
       </div>
-      <UI selections={selections} allowSound={allowSound} toggleSound={toggleSound}/>
     </div>
   )
 }

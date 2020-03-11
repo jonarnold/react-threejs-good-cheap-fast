@@ -26,8 +26,8 @@ export default ({toggleSound, allowSound, selections}) => {
             you get: {evalState()} */}
             {/* <h1>Good, Fast, or Cheap -- Pick any two.</h1> */}
             <h1 className="UI__question">How would you like your project completed?</h1>
-            <h2 className="UI__answer">{getOkPhrase()}. {evalState()}</h2>
-         
+            <p className="UI__answer">{getOkPhrase()}.</p>
+            <p className="UI__answer">{evalState()}</p>
       </div>
    )
 }
