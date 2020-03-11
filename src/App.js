@@ -22,7 +22,7 @@ export default function App() {
     //only update if this is a new value
     if(selections.includes(id)){
       return;
-    } 
+    }
 
     let updatedSelections = selections;
 
@@ -37,21 +37,21 @@ export default function App() {
   }
 
   return (
-    <>
-      <div className="wrapper-canvas">
+    <div className="App">
+      <div className="App__canvas">
         <Canvas
           concurrent
           noEvents={active}
           pixelRatio={window.devicePixelRatio}
-          camera={{ position: [0, 0, 2.5], fov: 65 }}
-          // gl={{ antialias: true }}
+          camera={{ position: [0, 0, 2.5], fov: 69 }}
+          gl={{ antialias: true }}
           onCreated={({ gl, scene }) => {
             gl.toneMapping = THREE.ACESFilmicToneMapping
             gl.outputEncoding = THREE.sRGBEncoding
             // scene.background = new THREE.Color('#373740')
           }}>
           <ambientLight intensity={0.33}/>
-          <Controls disable={set} />
+          <Controls />
           <Suspense fallback={<Dom center>Loading...</Dom>}>
             <Environment />
             <GFCMachine 
@@ -59,17 +59,17 @@ export default function App() {
               setNewSelection={setNewSelection} 
               allowSound={allowSound}
               position={[0, .1, 0]} 
-              rotation={[0, -1.3, 0]} 
+              rotation={[0, 1.3, 0]} 
             />
             <Effects />
             {/* {allowSound ? <PropellerSound allowSound={allowSound} url="audio/propeller.ogg"/> : null} */}
             <PropellerSound allowSound={allowSound} url="audio/propeller.ogg"/>
           </Suspense>
         </Canvas>
-        <UI selections={selections} allowSound={allowSound} toggleSound={toggleSound}/>
         
       </div>
-    </>
+      <UI selections={selections} allowSound={allowSound} toggleSound={toggleSound}/>
+    </div>
   )
 }
 

@@ -1,8 +1,18 @@
 .UI {
    position: absolute;
    top: 0;
-   right: 0;
-   width: 300px;
-   height: 100vh;
-   background-color: rgba(255, 255, 255, .1);
+   left: 0;
+   width: 33%;
+   height: 100%;
+   border: solid 1px blue
+}
+
+.UI__question {
+   font-size: 42px;
+   font-weight: 300;
+}
+
+.UI__answer {
+   font-size: 38px;
+   font-weight: 300;
 }

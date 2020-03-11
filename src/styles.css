@@ -10,20 +10,36 @@ body,
   margin: 0;
   padding: 0;
   overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+  font-family: 'Quicksand', sans-serif;
   color: white;
   background: linear-gradient(to bottom, #5f656b 0%,#93989e 67%,#d7dbe0 100%);
   user-select: none;
 }
 canvas {
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   outline: none;
 }
 
-div.wrapper-canvas {
-  width: 75%;
+.App {
+  max-width: 1000px;
+  margin: auto;
+  border: solid 1px red;
+  position: relative;
+  height: 100vh;
+}
+
+.App__canvas {
+  max-width: 700px;
+  border: solid 1px green;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 100vw;
 }
