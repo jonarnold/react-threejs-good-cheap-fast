@@ -4,7 +4,8 @@
    left: 0;
    width: 33%;
    height: 100%;
-   border: solid 1px blue
+   border: solid 1px blue;
+   color: rgba(255, 255, 255, .9);
 }
 
 .UI__question {
@@ -15,4 +16,10 @@
 .UI__answer {
    font-size: 38px;
    font-weight: 300;
+}
+
+.UI__answer--strong {
+   font-size: 38px;
+   font-weight: 700;
+   color: #fff;
 }
