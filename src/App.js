@@ -15,6 +15,7 @@ export default function App() {
   const [selections, setSelections] = React.useState([])
 
   const toggleSound = () => {
+    console.log('toggle sound');
     setAllowSound(s => !s);
   }
 

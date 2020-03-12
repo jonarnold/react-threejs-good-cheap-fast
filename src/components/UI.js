@@ -1,7 +1,10 @@
 import React from 'react';
 import './UI.css';
+import SoundButton from './SoundButton';
 
 export default ({toggleSound, allowSound, selections}) => {
+
+   
 
    const evalState = () => {
       if(selections.every(s => s !== 'good')) {
@@ -17,17 +20,19 @@ export default ({toggleSound, allowSound, selections}) => {
       const phrases = ['Ok', 'Got it', 'Check', 'Roger that', 'Understood', 'Very good', 'Fine', 'Alrighty', 'Gotcha', 'Right on', 'Very well', 'Noted', 'Fine' ]
       return phrases[Math.floor(Math.random() * phrases.length)];
    }
+
+   const [ okPhrase, setOkPhrase ] = React.useState(getOkPhrase());
+
+   React.useEffect(() => {
+      setOkPhrase(getOkPhrase());
+   }, [selections]);
    
    return (
       <div className="UI">
-         {/* <button style={allowSound ? {backgroundColor:'red'} : {backgroundColor:'white'}} onClick={toggleSound}>sound on/off</button> */}
-         
-            {/* You chose: {selections}
-            you get: {evalState()} */}
-            {/* <h1>Good, Fast, or Cheap -- Pick any two.</h1> */}
-            <h1 className="UI__question">How would you like your project completed?</h1>
-            <p className="UI__answer">{getOkPhrase()}.</p>
-            <p className="UI__answer">{evalState()}</p>
+         <SoundButton allowSound={allowSound} toggleSound={toggleSound}/>
+         <h1 className="UI__question">How would you like your project completed?</h1>
+         <p className="UI__answer">{okPhrase}.</p>
+         <p className="UI__answer">{evalState()}</p>
       </div>
    )
 }
