@@ -2,7 +2,6 @@ import React from 'react';
 import './SoundButton.scss';
 
 export default ({toggleSound, allowSound}) => {
-   console.log('Sound Button render wtf!!!');
    return (
       <button onClick={toggleSound} className="SoundButton">
          <div className="SoundButton__label">Sound</div>
