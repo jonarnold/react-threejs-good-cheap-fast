@@ -8,6 +8,7 @@ const getOkPhrase = () => {
 }
 
 const evalState = (s) => {
+   console.log('evalState!!!!!!!!!!!!!!!!!!!!!');
    if(s.every(s => s !== 'good')) {
    return <span>It will be <span className="UI__answer--strong">poo</span>.</span>;
    } else if(s.every(s => s !== 'fast')) {
@@ -18,22 +19,21 @@ const evalState = (s) => {
 }
 
 export default ({toggleSound, allowSound, selections}) => {
-   console.log("RENDERRRRRRRR");
+   // console.log("RENDERRRRRRRR");
    
    
    const [ okPhrase, setOkPhrase ] = React.useState(getOkPhrase());
    const [ show, setShow ] = React.useState(false);
 
-   console.log('wtf', show);
+   // console.log('wtf', show);
    
    let delay;
    React.useEffect(() => {
-      setShow(false);
       delay = window.setTimeout(() => {
          console.log("show")
          setShow(true);
          setOkPhrase(getOkPhrase());
-      }, 600)
+      }, 700)
 
       return () => {
          setShow(false);
