@@ -2,11 +2,12 @@
    position: absolute;
    top: 0;
    left: 0;
-   width: 48%;
+   width: 50%;
    height: 100%;
    /* border: solid 1px blue; */
    color: rgba(255, 255, 255, .9);
    transition: 300ms;
+   padding-left: 20px;
 }
 
 .UI__question {
@@ -17,18 +18,11 @@
 .UI__answer {
    font-size: 38px;
    font-weight: 300;
+   margin-top: 60px;
 }
 
 .UI__answer--strong {
    font-size: 38px;
    font-weight: 700;
    color: #fff;
-}
-
-.UI__show {
-   opacity: 1;
-}
-
-.UI__hide {
-   opacity: 0;
 }

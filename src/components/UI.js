@@ -5,7 +5,7 @@ import SoundButton from './SoundButton';
 
 const getOkPhrase = () => {
    const phrases = ['Ok', 'Got it', 'Check', 'Roger that', 'Understood', 'Very good', 'Fine', 'Alrighty', 'Gotcha', 'Right on', 'Very well', 'Noted', 'Fine' ]
-   return phrases[Math.floor(Math.random() * phrases.length)];
+   return phrases[Math.floor(Math.random() * phrases.length)] + '.';
 }
 
 export default ({toggleSound, allowSound, selections }) => {
@@ -48,10 +48,9 @@ export default ({toggleSound, allowSound, selections }) => {
          <SoundButton allowSound={allowSound} toggleSound={toggleSound}/>
          <h1 className="UI__question">How would you like your project completed?</h1>
 
-         {/* <a.p style={show ? {opacity:'1'} : {opacity:'0'}} className="UI__answer">{okPhrase}.</a.p>
-         <a.p style={show ? {opacity:'1'} : {opacity:'0'}} className="UI__answer">{evalState(selections)}</a.p> */}
          {transitions.map(({ item, props, key }) =>
-            <animated.div key={key} style={props}>{item}</animated.div>)}
+            <animated.div className="UI__answer" key={key} style={props}>{item}</animated.div>
+         )}
       </div>
    )
 }
