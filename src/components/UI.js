@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { useTransition, animated } from 'react-spring';
 import './UI.css';
 import SoundButton from './SoundButton';
+import AboutModal from './AboutModal';
 
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -62,11 +63,13 @@ export default ({toggleSound, allowSound, selections }) => {
 
          <button onClick={() => setModalOpen(true)} className="Website__about-link">About</button>
 
+         <AboutModal />
+
          <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
             className={classes.modal} //required for close-clicking on bg
-            open={false}
+            open={modalOpen}
             onClose={() => setModalOpen(false)}
             closeAfterTransition
             BackdropComponent={Backdrop}
@@ -74,7 +77,7 @@ export default ({toggleSound, allowSound, selections }) => {
                timeout: 500,
             }}
             >
-            <Fade in={true}>
+            <Fade in={modalOpen}>
                <div className="About">
                   <div onClick={() => setModalOpen(false)} className="About__card">
                      <button onClick={() => setModalOpen(false)} className="close">&times;</button>
