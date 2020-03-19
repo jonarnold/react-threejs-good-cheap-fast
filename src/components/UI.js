@@ -1,13 +1,9 @@
 import React, { useRef } from 'react';
 import { useTransition, animated } from 'react-spring';
-import './UI.css';
+import './UI.scss';
 import SoundButton from './SoundButton';
-import AboutModal from './AboutModal';
-
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import { makeStyles } from '@material-ui/core/styles';
+import arrowImg from '../images/arrow-sm.png';
+import About from './About';
 
 const getOkPhrase = () => {
    const phrases = ['Ok', 'Got it', 'Check', 'Roger that', 'Understood', 'Very good', 'Fine', 'Alrighty', 'Gotcha', 'Right on', 'Very well', 'Noted', 'Fine' ]
@@ -25,7 +21,6 @@ export default ({toggleSound, allowSound, selections }) => {
       });
 
    const [modalOpen, setModalOpen] = React.useState(false);
-   const classes = useStyles();
    
    React.useEffect(() => {
       update();
@@ -54,56 +49,19 @@ export default ({toggleSound, allowSound, selections }) => {
    
    return (
       <div className="UI">
-         <SoundButton allowSound={allowSound} toggleSound={toggleSound}/>
          <h1 className="UI__question">How would you like your project completed?</h1>
 
          {transitions.map(({ item, props, key }) =>
             <animated.div className="UI__answer" key={key} style={props}>{item}</animated.div>
          )}
 
-         <button onClick={() => setModalOpen(true)} className="Website__about-link">About</button>
+         <SoundButton allowSound={allowSound} toggleSound={toggleSound}/>
+         <button onClick={() => setModalOpen(true)} className="UI__about-link">About</button>
+         <div className="UI__dragText">Drag to orbit</div>
+         <img className="UI__dragArrow" src={arrowImg} alt=""/>
 
-         <AboutModal />
-
-         <Modal
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
-            className={classes.modal} //required for close-clicking on bg
-            open={modalOpen}
-            onClose={() => setModalOpen(false)}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-               timeout: 500,
-            }}
-            >
-            <Fade in={modalOpen}>
-               <div className="About">
-                  <div onClick={() => setModalOpen(false)} className="About__card">
-                     <button onClick={() => setModalOpen(false)} className="close">&times;</button>
-                     <div className="About__outline">
-                        {/* <img className="About__icon About__animation" src={jonImg2} alt="Jon Arnold"/> */}
-                        <h1 className="About__title About__animation">About this website</h1>
-                        <p className="About__body About__animation">
-                        AsdAs dAsd asd asd asd asd asd asd asd asd asd .
-
-                        </p>
-                        
-                     </div>
-                  </div>
-               </div>
-            </Fade>
-         </Modal>
-
-
+         <About modalOpen={modalOpen} setModalOpen={setModalOpen} />
       </div>
    )
 }
 
-const useStyles = makeStyles(theme => ({
-   modal: {
-     display: 'flex',
-     alignItems: 'center',
-     justifyContent: 'center',
-   }
- }));

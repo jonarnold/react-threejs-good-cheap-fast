@@ -1,0 +1,159 @@
+.About {
+   height: 100vh;
+   color: #4E4E4E;
+   z-index: 9999;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   outline: none;
+   text-align: center;
+
+   animation: open .3s;
+   animation-fill-mode: backwards;
+
+   &__card {
+      position: relative;
+      background-color: #FFF;
+      margin: 4rem;
+   }
+
+   &__outline {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 1rem;
+      // border: 1px dashed rgba(0, 44, 95, .4);
+      padding: 3rem;
+      max-width: 70rem;
+   }
+
+   &__icon {
+      width: 11rem;
+       height: 11rem;
+       margin-bottom: 2rem;
+       margin-top: 1rem;
+       animation-delay: .5s !important;
+      //  border: 5px solid #fff;
+      //  box-shadow: 0 3px 15px rgba(0, 0, 0, .1);
+       border-radius: 200px;
+   }
+
+   &__title {
+      color: #5f656b;
+      font-size: 3.3rem;
+      margin-bottom: 1.5rem;
+      font-weight: normal;
+      animation-delay: .75s !important;
+   }
+
+   &__body {
+      font-size: 2.1rem;
+      line-height: 2.5rem;
+      margin-bottom: 2.5rem;
+      animation-delay: 1s !important;
+   }
+
+   &__animation {
+      animation: fadeIn 1.5s;
+      animation-fill-mode: backwards;
+   }
+}
+
+.About .close {
+   position: absolute;
+   top: 1.5rem;
+   right: 1.5rem;
+   border: none;
+   background: none;
+   outline: none;
+   width: 4rem;
+   height: 3.2rem;
+   font-size: 5rem;
+   line-height: 0rem;
+   display: block;
+   cursor: pointer;
+   font-family: sans-serif;
+}
+
+.About .close:hover {
+   opacity: .4;
+}
+
+
+
+ @keyframes fadeIn {
+   from { 
+      transform: translateY(-7px);
+      opacity: 0;
+   }
+   to   { 
+      transform: translateY(0px);
+      opacity: 1;
+   }
+ }
+
+ @keyframes open {
+   from { 
+      transform: scale(.9);
+      opacity: 0;
+   }
+   to   { 
+      transform: scale(1);
+      opacity: 1;
+   }
+ }
+
+ @keyframes close {
+   from { 
+      transform: scale(1);
+      opacity: 0;
+   }
+   to   { 
+      transform: scale(.9);
+      opacity: 1;
+   }
+ }
+
+ @media screen and (max-width: 430px) {
+   .About__outline {
+      padding: 1rem;
+   }
+
+   .About__icon {
+      width: 10rem;
+       height: 10rem;
+   }
+
+   .About__card {
+      margin: 1rem;
+   }
+
+   .About__body {
+      line-height: 2.5rem;
+   }
+
+   .About__signature {
+      display: none;
+   }
+}
+
+@media screen and (max-width: 370px) {
+   .About__icon {
+      width: 8rem;
+       height: 8rem;
+   }
+
+   .About__outline {
+      padding: 1rem;
+   }
+
+   .About__title {
+      font-size: 2.5rem;
+   }
+   
+   .About__body {
+      font-size: 1.8rem;
+      line-height: 2.1rem;
+   }
+}

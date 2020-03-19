@@ -1,0 +1,66 @@
+.UI {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 50%;
+   height: 100%;
+   // border: solid 1px blue;
+   color: rgba(255, 255, 255, .9);
+   transition: 300ms;
+   padding-left: 2rem;
+
+   &__question {
+      margin-top: 10rem;
+      margin-bottom: 13rem;
+      font-size: 4.2rem;
+      font-weight: 300;
+   }
+   
+   &__answer {
+      font-size: 3.8rem;
+      font-weight: 300;
+      margin-top: 6rem;
+
+      &--strong {
+         font-weight: 700;
+         color: #fff;
+      }
+   }
+
+   &__about-link {
+      position: absolute;
+      bottom: 3.5rem;
+      left: 15rem;
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--default-color);
+      font-family: inherit;
+      font-size: 1.3rem;
+      font-weight: 600;
+      transition: var(--transition-time);
+      cursor: pointer;
+
+      &:hover {
+         color: var(--active-color)
+      }
+   }
+
+   &__dragText {
+      position: absolute;
+      bottom: 3.5rem;
+      right: 0;
+      color: var(--default-color);
+      font-family: inherit;
+      font-size: 1.3rem;
+      font-weight: 600;
+   }
+
+   &__dragArrow {
+      position: absolute;
+      bottom: 3.75rem;
+      right: -3.5rem;
+      opacity: .5;
+      width: 3rem;
+   }
+}

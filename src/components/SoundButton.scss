@@ -1,9 +1,7 @@
-:root {
-   --default-color: rgba(255, 255, 255, .5);
-   --active-color: #fff;
-   --transition-time: 200ms
-}
+
 .SoundButton {
+   position: absolute;
+   bottom: 3rem;
    display: block;
    outline: none; //may god have mercy on my soul
    width: 100px;
@@ -13,9 +11,6 @@
    background: none;
    display: flex;
    align-items: center;
-   padding: 0;
-   margin-top: 36px;
-   margin-bottom: 64px;
    color: var(--default-color);
    transition: var(--transition-time);
 
@@ -24,21 +19,20 @@
    }
 
    &__label {
-      text-transform: uppercase;
-      font-size: 14px;
-      font-weight: bold;
+      font-size: 1.3rem;
+      font-weight: 600;
       margin-right: 8px;
    }
 
    &__pill {
       border: solid 1px var(--default-color);
-      border-radius: 20px;
-      width: 38px;
+      border-radius: 2rem;
+      width: 3.8rem;
       display: flex;
-      padding: 1px;
+      padding: .1rem;
 
       &--active {
-         border: solid 1px var(--active-color);
+         // border: solid 1px var(--active-color);
       }
    }
 
