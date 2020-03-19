@@ -5,10 +5,7 @@ import SoundButton from './SoundButton';
 import arrowImg from '../images/arrow-sm.png';
 import About from './About';
 
-const getOkPhrase = () => {
-   const phrases = ['Ok', 'Got it', 'Check', 'Roger that', 'Understood', 'Very good', 'Fine', 'Alrighty', 'Gotcha', 'Right on', 'Very well', 'Noted', 'Fine' ]
-   return phrases[Math.floor(Math.random() * phrases.length)] + '.';
-}
+
 
 export default ({toggleSound, allowSound, selections }) => {
    
@@ -36,10 +33,25 @@ export default ({toggleSound, allowSound, selections }) => {
       ref.current.push(setTimeout(() => setItems([ok, getResultPhrase()]), 1300))
     }
 
+   const getOkPhrase = () => {
+      if(selections.length === 0) {
+         return 'Select any two...';
+      } else if (selections.length === 1) {
+         return 'Ok, select one more...';
+      } 
+   
+      const phrases = ['Ok', 'Got it', 'Check', 'Roger that', 'Understood', 'Very good', 'Fine', 'Alrighty', 'Gotcha', 'Right on', 'Very well', 'Noted', 'Fine', 'Good choices' ]
+      return phrases[Math.floor(Math.random() * phrases.length)] + '.';
+   }
 
    const getResultPhrase = () => {
+
+      if(selections.length < 2) {
+         return;
+      }
+
       if(selections.every(s => s !== 'good')) {
-      return <span>It will be <span className="UI__answer--strong">poo</span>.</span>;
+         return <span>It will be <span className="UI__answer--strong">poo</span>.</span>;
       } else if(selections.every(s => s !== 'fast')) {
          return <span>It will <span className="UI__answer--strong">take a while</span>.</span>;
       } else if(selections.every(s => s !== 'cheap')) {
