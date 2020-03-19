@@ -46,7 +46,8 @@ function playRandomServo() {
 }
 
 export default function GFCMachine(props) {
-  const group = useRef()
+  const group = useRef();
+  const outerGroup = useRef();
   const { nodes, materials } = useLoader(GLTFLoader, 'gfc-hq.glb', loader => {
     const dracoLoader = new DRACOLoader()
     dracoLoader.setDecoderPath('draco-gltf/')
@@ -67,10 +68,10 @@ export default function GFCMachine(props) {
         sphere.current.rotation.y += .04;
       }
 
-      group.current.position.y = Math.sin(clock.getElapsedTime() * 1.1) * .057 + 0.1;
-      group.current.position.x = Math.sin(clock.getElapsedTime() * 1.5) * .05;
-      group.current.position.z = Math.sin(clock.getElapsedTime() * 1.3) * .05;
-      group.current.rotation.y = -Math.sin(clock.getElapsedTime() * .25) * .3 - 1.60; //speed, amount, rotation tweak
+      outerGroup.current.position.y = Math.sin(clock.getElapsedTime() * 1.1) * .057 + 0.1;
+      outerGroup.current.position.x = Math.sin(clock.getElapsedTime() * 1.5) * .05;
+      outerGroup.current.position.z = Math.sin(clock.getElapsedTime() * 1.3) * .05;
+      outerGroup.current.rotation.y = -Math.sin(clock.getElapsedTime() * .25) * .3 - 1.60; //speed, amount, rotation tweak
     }
   )
 
@@ -154,8 +155,26 @@ export default function GFCMachine(props) {
     from: {sphereRot: 16}
   })
 
+  const {machineY} = useSpring({
+    to: {machineY: 0},
+    from: {machineY: 3},
+    delay: 500,
+    config: { mass: 1, tension: 280, friction: 120 }
+  })
+
   return (
-    <a.group ref={group} {...props} dispose={null} > 
+    <a.group 
+      ref={outerGroup} 
+      {...props} 
+      dispose={null} 
+      
+    > 
+    <a.group 
+      ref={group} 
+      {...props} 
+      dispose={null} 
+      position = {machineY.interpolate(y => [0, y, 0])} 
+    > 
       <mesh material={materials['gfc main']} geometry={nodes.casing.geometry} position={[0, 0, 0]}>
 
 
@@ -265,6 +284,7 @@ export default function GFCMachine(props) {
           </mesh>
         </group>
       </mesh>
+    </a.group>
     </a.group>
   )
 }

@@ -54,14 +54,14 @@ export default function App() {
           }}>
           <ambientLight intensity={0.33}/>
           <Controls />
-          <Suspense fallback={<Dom center>Loading...</Dom>}>
+          <Suspense fallback={<Dom style={{fontSize: '2.5rem'}} center>Loading...</Dom>}>
             <Environment />
             <GFCMachine 
               selections={selections} 
               setNewSelection={setNewSelection} 
               allowSound={allowSound}
-              position={[0, .1, 0]} 
-              rotation={[0, 1.3, 0]} 
+              position={[0, 0.1, 0]} 
+              // rotation={[0, 1.3, 0]} 
             />
             <Effects />
             {/* {allowSound ? <PropellerSound allowSound={allowSound} url="audio/propeller.ogg"/> : null} */}
