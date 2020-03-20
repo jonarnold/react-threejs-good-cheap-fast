@@ -13,6 +13,7 @@ export default function App() {
   const [active, set] = useState(false);
   const [allowSound, setAllowSound] = useState(false);
   const [selections, setSelections] = React.useState([])
+  const [loaded, setLoaded] = React.useState(false);
 
   const toggleSound = () => {
     console.log('toggle sound');
@@ -39,7 +40,8 @@ export default function App() {
 
   return (
     <div className="App">
-      <UI selections={selections} allowSound={allowSound} toggleSound={toggleSound}/>
+      {loaded && <UI selections={selections} allowSound={allowSound} toggleSound={toggleSound}/>}
+      
       <div className="App__canvas">
         <Canvas
           concurrent
@@ -61,7 +63,7 @@ export default function App() {
               setNewSelection={setNewSelection} 
               allowSound={allowSound}
               position={[0, 0.1, 0]} 
-              // rotation={[0, 1.3, 0]} 
+              setLoaded = {setLoaded}
             />
             <Effects />
             {/* {allowSound ? <PropellerSound allowSound={allowSound} url="audio/propeller.ogg"/> : null} */}

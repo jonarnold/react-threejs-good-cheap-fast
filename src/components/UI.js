@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useTransition, animated } from 'react-spring';
+import { useSpring, useTransition, animated } from 'react-spring';
 import './UI.scss';
 import SoundButton from './SoundButton';
 import arrowImg from '../images/arrow-sm.png';
@@ -22,6 +22,13 @@ export default ({toggleSound, allowSound, selections }) => {
    React.useEffect(() => {
       update();
    }, [selections]);
+
+
+   const style = useSpring({ 
+      to: {opacity: 1}, 
+      from: {opacity: 0},
+      config: { mass: 1, tension: 280, friction: 60 }
+   })
 
 
    const update = () => {
@@ -60,7 +67,7 @@ export default ({toggleSound, allowSound, selections }) => {
    }
    
    return (
-      <div className="UI">
+      <animated.div className="UI" style={style}>
          <h1 className="UI__question">How would you like your project completed?</h1>
 
          {transitions.map(({ item, props, key }) =>
@@ -73,7 +80,7 @@ export default ({toggleSound, allowSound, selections }) => {
          <img className="UI__dragArrow" src={arrowImg} alt=""/>
 
          <About modalOpen={modalOpen} setModalOpen={setModalOpen} />
-      </div>
+      </animated.div>
    )
 }
 

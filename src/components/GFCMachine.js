@@ -57,6 +57,13 @@ export default function GFCMachine(props) {
   const [hovered, set] = useState(false);
   useEffect(() => void (document.body.style.cursor = hovered ? 'pointer' : 'auto'), [hovered]);
 
+  //Start CSS
+  React.useEffect(() => {
+    setTimeout(() => {
+      props.setLoaded(true);
+    }, 2500)
+  }, []);
+
   const [propellerTex] = useLoader(THREE.TextureLoader, [propellerImg])
 
   const propeller = useRef();
