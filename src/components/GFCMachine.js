@@ -174,122 +174,122 @@ export default function GFCMachine(props) {
       dispose={null} 
       
     > 
-    <a.group 
-      ref={group} 
-      {...props} 
-      dispose={null} 
-      position = {machineY.interpolate(y => [0, y, 0])} 
-    > 
-      <mesh material={materials['gfc main']} geometry={nodes.casing.geometry} position={[0, 0, 0]}>
+      <a.group 
+        ref={group} 
+        {...props} 
+        dispose={null} 
+        position = {machineY.interpolate(y => [0, y, 0])} 
+      > 
+        <mesh material={materials['gfc main']} geometry={nodes.casing.geometry} position={[0, 0, 0]}>
 
 
-        {/* ARROWS */}
-        <a.mesh 
-          material={materials['gfc main']} 
-          geometry={nodes.arrow1.geometry} 
-          position={[0.38, 0.06, 0.35]} 
-          rotation={arrowRot1.interpolate(r => [r, 0, 0])}
-        />
-        <a.mesh 
-          material={materials['gfc main']} 
-          geometry={nodes.arrow2.geometry} 
-          position={[0.38, 0.06, -0.35]} 
-          rotation={arrowRot2.interpolate(r => [r, 0, 0])}
-        />
-        <a.mesh 
-          material={materials['gfc main']} 
-          geometry={nodes.arrow3.geometry} 
-          position={[0.38, -0.54, 0]} 
-          rotation={arrowRot3.interpolate(r => [r, 0, 0])}
-        />
-
-
-        {/* BUTTONS */}
-        <a.mesh 
-          material={materials['gfc main']} 
-          geometry={nodes.button1.geometry} 
-          position={buttonPos1.interpolate(p => [p, 0.33, 0.83])} 
-          onPointerOver={() => set(true)} 
-          onPointerOut={() => set(false)}
-          onPointerDown={() => handleClick('good')}
-        />
-        <a.mesh 
-          material={materials['gfc main']} 
-          geometry={nodes.button2.geometry} 
-          position={buttonPos2.interpolate(p => [p, 0.33, -0.82])}
-          onPointerOver={() => set(true)} 
-          onPointerOut={() => set(false)}
-          onPointerDown={() => handleClick('fast')}
-        />
-        <a.mesh 
-          material={materials['gfc main']} 
-          geometry={nodes.button3.geometry} 
-          position={buttonPos3.interpolate(p => [p, -1.09, 0])} 
-          onPointerOver={() => set(true)} 
-          onPointerOut={() => set(false)}
-          onPointerDown={() => handleClick('cheap')}
-        />
-
-
-        {/* LIGHTS */}
-        <mesh material={nodes.light1.material} geometry={nodes.light1.geometry}>
-          <meshPhongMaterial 
-            attach = "material"
-            color = {new THREE.Color('#010201')}
-            emissive = {new THREE.Color('#00ff00')}
-            emissiveIntensity = {isActive('good') || isInitActive('good') ? 50 : 0}
-          />
-        </mesh>
-        <mesh material={nodes.light2.material} geometry={nodes.light2.geometry}>
-          <meshPhongMaterial 
-            attach = "material" 
-            color = {new THREE.Color('#010201')}
-            emissive = {new THREE.Color('#00ff00')}
-            emissiveIntensity = {isActive('fast') || isInitActive('fast') ? 50 : 0}
-          />
-        </mesh>
-        <mesh material={nodes.light3.material} geometry={nodes.light3.geometry}>
-          <meshPhongMaterial 
-            attach = "material" 
-            color = {new THREE.Color('#010201')}
-            emissive = {new THREE.Color('#00ff00')}
-            emissiveIntensity = {isActive('cheap') || isInitActive('cheap') ? 50 : 0}
-          />
-        </mesh>
-
-
-        {/* SPHERE */}
-        {props.selections.length === 2
-         ?
-          <a.mesh ref={sphere}
+          {/* ARROWS */}
+          <a.mesh 
             material={materials['gfc main']} 
-            geometry={nodes.sphere.geometry} 
-            position={[0.18, -0.14, 0]}  
-            rotation={sphereRot.interpolate(r => [0, r, 0])}
+            geometry={nodes.arrow1.geometry} 
+            position={[0.38, 0.06, 0.35]} 
+            rotation={arrowRot1.interpolate(r => [r, 0, 0])}
           />
-          :
-          <a.mesh ref={sphere}
+          <a.mesh 
             material={materials['gfc main']} 
-            geometry={nodes.sphere.geometry} 
-            position={[0.18, -0.14, 0]}
+            geometry={nodes.arrow2.geometry} 
+            position={[0.38, 0.06, -0.35]} 
+            rotation={arrowRot2.interpolate(r => [r, 0, 0])}
           />
-        }
-        
+          <a.mesh 
+            material={materials['gfc main']} 
+            geometry={nodes.arrow3.geometry} 
+            position={[0.38, -0.54, 0]} 
+            rotation={arrowRot3.interpolate(r => [r, 0, 0])}
+          />
 
-        {/* PROPELLER */}
-        <group ref={propeller} position={[-0.01, 0.86, 0]}>
-          <mesh material={materials['gfc main']} geometry={nodes.propeller_0.geometry} />
-          <mesh geometry = {nodes.propeller_1.geometry}>
-            <meshStandardMaterial
-              attach="material" 
-              map={propellerTex} 
-              side={THREE.DoubleSide}
-              transparent
+
+          {/* BUTTONS */}
+          <a.mesh 
+            material={materials['gfc main']} 
+            geometry={nodes.button1.geometry} 
+            position={buttonPos1.interpolate(p => [p, 0.33, 0.83])} 
+            onPointerOver={() => set(true)} 
+            onPointerOut={() => set(false)}
+            onPointerDown={() => handleClick('good')}
+          />
+          <a.mesh 
+            material={materials['gfc main']} 
+            geometry={nodes.button2.geometry} 
+            position={buttonPos2.interpolate(p => [p, 0.33, -0.82])}
+            onPointerOver={() => set(true)} 
+            onPointerOut={() => set(false)}
+            onPointerDown={() => handleClick('fast')}
+          />
+          <a.mesh 
+            material={materials['gfc main']} 
+            geometry={nodes.button3.geometry} 
+            position={buttonPos3.interpolate(p => [p, -1.09, 0])} 
+            onPointerOver={() => set(true)} 
+            onPointerOut={() => set(false)}
+            onPointerDown={() => handleClick('cheap')}
+          />
+
+
+          {/* LIGHTS */}
+          <mesh material={nodes.light1.material} geometry={nodes.light1.geometry}>
+            <meshPhongMaterial 
+              attach = "material"
+              color = {new THREE.Color('#010201')}
+              emissive = {new THREE.Color('#00ff00')}
+              emissiveIntensity = {isActive('good') || isInitActive('good') ? 50 : 0}
             />
           </mesh>
-        </group>
-      </mesh>
-    </a.group>
+          <mesh material={nodes.light2.material} geometry={nodes.light2.geometry}>
+            <meshPhongMaterial 
+              attach = "material" 
+              color = {new THREE.Color('#010201')}
+              emissive = {new THREE.Color('#00ff00')}
+              emissiveIntensity = {isActive('fast') || isInitActive('fast') ? 50 : 0}
+            />
+          </mesh>
+          <mesh material={nodes.light3.material} geometry={nodes.light3.geometry}>
+            <meshPhongMaterial 
+              attach = "material" 
+              color = {new THREE.Color('#010201')}
+              emissive = {new THREE.Color('#00ff00')}
+              emissiveIntensity = {isActive('cheap') || isInitActive('cheap') ? 50 : 0}
+            />
+          </mesh>
+
+
+          {/* SPHERE */}
+          {props.selections.length === 2
+          ?
+            <a.mesh ref={sphere}
+              material={materials['gfc main']} 
+              geometry={nodes.sphere.geometry} 
+              position={[0.18, -0.14, 0]}  
+              rotation={sphereRot.interpolate(r => [0, r, 0])}
+            />
+            :
+            <a.mesh ref={sphere}
+              material={materials['gfc main']} 
+              geometry={nodes.sphere.geometry} 
+              position={[0.18, -0.14, 0]}
+            />
+          }
+          
+
+          {/* PROPELLER */}
+          <group ref={propeller} position={[-0.01, 0.86, 0]}>
+            <mesh material={materials['gfc main']} geometry={nodes.propeller_0.geometry} />
+            <mesh geometry = {nodes.propeller_1.geometry}>
+              <meshStandardMaterial
+                attach="material" 
+                map={propellerTex} 
+                side={THREE.DoubleSide}
+                transparent
+              />
+            </mesh>
+          </group>
+        </mesh>
+      </a.group>
     </a.group>
   )
 }

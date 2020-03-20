@@ -6,7 +6,8 @@ import Environment from './components/Environment'
 import GFCMachine from './components/GFCMachine'
 import Effects from './components/Effects'
 import './styles.css'
-import UI from './components/UI'
+import UI from './components/UI';
+import Loading from './components/Loading';
 
 export default function App() {
   // Controls disable pointerevents on movement to save some CPU cost
@@ -49,7 +50,7 @@ export default function App() {
 
   return (
     <div className="App">
-      {!modelLoaded && <Loading/>}
+      {!loadUI && <Loading modelLoaded={modelLoaded}/>}
       {loadUI && <UI selections={selections} allowSound={allowSound} toggleSound={toggleSound}/>}
       
       <div className="App__canvas">
@@ -79,7 +80,6 @@ export default function App() {
             <PropellerSound allowSound={allowSound} url="audio/propeller.ogg"/>
           </Suspense>
         </Canvas>
-        
       </div>
     </div>
   )
@@ -107,19 +107,4 @@ const PropellerSound = ({ url, allowSound }) => {
     return () => camera.remove(listener)
   }, [allowSound])
   return <positionalAudio ref={sound} args={[listener]} />
-}
-
-const Loading = () => {
-  const style = {
-    fontSize: '2.5rem',
-    position: 'absolute',
-    top: '45%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)'
-  }
-  return (
-    <div style={style}>
-      Loading...
-    </div>
-  )
 }
