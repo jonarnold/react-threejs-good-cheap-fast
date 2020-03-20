@@ -5,8 +5,6 @@ import SoundButton from './SoundButton';
 import arrowImg from '../images/arrow-sm.png';
 import About from './About';
 
-
-
 export default ({toggleSound, allowSound, selections }) => {
    
    const ref = useRef([])

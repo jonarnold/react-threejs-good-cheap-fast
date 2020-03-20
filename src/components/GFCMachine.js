@@ -59,9 +59,7 @@ export default function GFCMachine(props) {
 
   //Start CSS
   React.useEffect(() => {
-    setTimeout(() => {
-      props.setLoaded(true);
-    }, 2500)
+      props.setModelLoaded(true);
   }, []);
 
   const [propellerTex] = useLoader(THREE.TextureLoader, [propellerImg])

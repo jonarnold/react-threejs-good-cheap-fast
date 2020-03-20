@@ -18,11 +18,11 @@
    }
 
    &__outline {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      margin: 1rem;
+      // display: flex;
+      // flex-direction: column;
+      // justify-content: center;
+      // align-items: center;
+      // margin: 1rem;
       // border: 1px dashed rgba(0, 44, 95, .4);
       padding: 3rem;
       max-width: 70rem;
@@ -69,15 +69,16 @@
    outline: none;
    width: 4rem;
    height: 3.2rem;
-   font-size: 5rem;
+   font-size: 3rem;
    line-height: 0rem;
    display: block;
    cursor: pointer;
    font-family: sans-serif;
+   color: #93989e;
 }
 
 .About .close:hover {
-   opacity: .4;
+   color: #5f656b;
 }
 
 

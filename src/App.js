@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import React, { Suspense, useState, useRef, useEffect } from 'react'
-import { Canvas, Dom, useLoader, useThree } from 'react-three-fiber'
+import { Canvas, useLoader, useThree } from 'react-three-fiber'
 import Controls from './components/Controls'
 import Environment from './components/Environment'
 import GFCMachine from './components/GFCMachine'
@@ -13,7 +13,16 @@ export default function App() {
   const [active, set] = useState(false);
   const [allowSound, setAllowSound] = useState(false);
   const [selections, setSelections] = React.useState([])
-  const [loaded, setLoaded] = React.useState(false);
+  const [modelLoaded, setModelLoaded] = React.useState(false);
+  const [loadUI, setLoadUI] = React.useState(false);
+
+  React.useEffect(() => {
+    if(modelLoaded){
+      setTimeout(() => {
+        setLoadUI(true)
+      }, 2000)
+    }
+  }, [modelLoaded])
 
   const toggleSound = () => {
     console.log('toggle sound');
@@ -40,7 +49,8 @@ export default function App() {
 
   return (
     <div className="App">
-      {loaded && <UI selections={selections} allowSound={allowSound} toggleSound={toggleSound}/>}
+      {!modelLoaded && <Loading/>}
+      {loadUI && <UI selections={selections} allowSound={allowSound} toggleSound={toggleSound}/>}
       
       <div className="App__canvas">
         <Canvas
@@ -56,17 +66,16 @@ export default function App() {
           }}>
           <ambientLight intensity={0.33}/>
           <Controls />
-          <Suspense fallback={<Dom style={{fontSize: '2.5rem'}} center>Loading...</Dom>}>
+          <Suspense fallback={null}>
             <Environment />
             <GFCMachine 
               selections={selections} 
               setNewSelection={setNewSelection} 
               allowSound={allowSound}
               position={[0, 0.1, 0]} 
-              setLoaded = {setLoaded}
+              setModelLoaded = {setModelLoaded}
             />
             <Effects />
-            {/* {allowSound ? <PropellerSound allowSound={allowSound} url="audio/propeller.ogg"/> : null} */}
             <PropellerSound allowSound={allowSound} url="audio/propeller.ogg"/>
           </Suspense>
         </Canvas>
@@ -98,4 +107,19 @@ const PropellerSound = ({ url, allowSound }) => {
     return () => camera.remove(listener)
   }, [allowSound])
   return <positionalAudio ref={sound} args={[listener]} />
+}
+
+const Loading = () => {
+  const style = {
+    fontSize: '2.5rem',
+    position: 'absolute',
+    top: '45%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)'
+  }
+  return (
+    <div style={style}>
+      Loading...
+    </div>
+  )
 }

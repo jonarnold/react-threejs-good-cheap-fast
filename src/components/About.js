@@ -31,14 +31,14 @@ export default ({modalOpen, setModalOpen}) => {
                   <div className="About__outline">
                      <img className="About__icon About__animation" src={jonImg} alt="Jon Arnold"/>
                      <h1 className="About__title About__animation">An experiment in:</h1>
-                     <p className="About__body About__animation">
+                     <div className="About__body About__animation">
                         <ul>
                            <li>3D modeling and texturing in Blender</li>
                            <li>3D animation in mobile and desktop browsers</li>
                            <li>React front-end</li>
                            <li>Responsive CSS</li>
                         </ul>
-                     </p>
+                     </div>
                      
                   </div>
                </div>
