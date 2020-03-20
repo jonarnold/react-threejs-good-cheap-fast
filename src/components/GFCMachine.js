@@ -54,7 +54,7 @@ export default function GFCMachine(props) {
     loader.setDRACOLoader(dracoLoader)
   })
 
-  const [hovered, set] = useState(false);
+  const [hovered, setHover] = useState(false);
   useEffect(() => void (document.body.style.cursor = hovered ? 'pointer' : 'auto'), [hovered]);
 
   //Start CSS
@@ -69,9 +69,9 @@ export default function GFCMachine(props) {
   useFrame( ({ clock }) => {
       propeller.current.rotation.y += .4;
       
-      if(sphere.current !== null && props.selections.length < 2) {
-        sphere.current.rotation.y += .04;
-      }
+      // if(sphere.current !== null && props.selections.length < 2) {
+      //   sphere.current.rotation.y += .04;
+      // }
 
       outerGroup.current.position.y = Math.sin(clock.getElapsedTime() * 1.1) * .057 + 0.1;
       outerGroup.current.position.x = Math.sin(clock.getElapsedTime() * 1.5) * .05;
@@ -116,7 +116,7 @@ export default function GFCMachine(props) {
     }
 
     return () => window.clearInterval(interval);
-  }, [props])
+  }, [props.selections])
 
 
   const isInitActive = (selection) => {
@@ -125,6 +125,7 @@ export default function GFCMachine(props) {
 
 
   const sphereRotVal = () => {
+    console.log('sphereRotVal', props.selections);
     if(props.selections.every(s => s !== 'good')) {
         return Math.PI/1.5;
     } else if(props.selections.every(s => s !== 'fast')) {
@@ -209,24 +210,24 @@ export default function GFCMachine(props) {
             material={materials['gfc main']} 
             geometry={nodes.button1.geometry} 
             position={buttonPos1.interpolate(p => [p, 0.33, 0.83])} 
-            onPointerOver={() => set(true)} 
-            onPointerOut={() => set(false)}
+            onPointerOver={() => setHover(true)} 
+            onPointerOut={() => setHover(false)}
             onPointerDown={() => handleClick('good')}
           />
           <a.mesh 
             material={materials['gfc main']} 
             geometry={nodes.button2.geometry} 
             position={buttonPos2.interpolate(p => [p, 0.33, -0.82])}
-            onPointerOver={() => set(true)} 
-            onPointerOut={() => set(false)}
+            onPointerOver={() => setHover(true)} 
+            onPointerOut={() => setHover(false)}
             onPointerDown={() => handleClick('fast')}
           />
           <a.mesh 
             material={materials['gfc main']} 
             geometry={nodes.button3.geometry} 
             position={buttonPos3.interpolate(p => [p, -1.09, 0])} 
-            onPointerOver={() => set(true)} 
-            onPointerOut={() => set(false)}
+            onPointerOver={() => setHover(true)} 
+            onPointerOut={() => setHover(false)}
             onPointerDown={() => handleClick('cheap')}
           />
 
