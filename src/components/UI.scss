@@ -48,7 +48,7 @@
 
    &__dragText {
       position: absolute;
-      bottom: 3.5rem;
+      bottom: 3.75rem;
       right: 0;
       color: var(--default-color);
       font-family: inherit;
@@ -58,9 +58,87 @@
 
    &__dragArrow {
       position: absolute;
-      bottom: 3.75rem;
+      bottom: 4rem;
       right: -3.5rem;
       opacity: .5;
       width: 3rem;
+   }
+}
+
+@media screen and (max-width: 1200px) {
+   .UI {
+      &__question {
+         margin-top: 6rem;
+         font-size: 3.75rem;
+      }
+      
+      &__answer {
+         top: 50%;
+         font-size: 3rem;
+      }
+   }
+}
+
+@media screen and (max-width: 900px) {
+   .UI {
+      &__question {
+         margin-top: 2rem;
+         font-size: 3.5rem;
+      }
+      
+      &__answer {
+         font-size: 2.5rem;
+      }
+   }
+}
+
+@media screen and (max-width: 820px) {
+   .UI {
+      width: 100%;
+      padding: 1rem;
+
+      &__question {
+         text-align: center;
+         margin-top: 2rem;
+         font-size: 3.5rem;
+      }
+      
+      &__answer {
+         position: static;
+         text-align: center;
+         width: 100%
+      }
+
+      &__about-link {
+         bottom: 3rem;
+         left: 15rem;
+      }
+   
+      &__dragText {
+         bottom: 3.25rem;
+         right: 3rem;
+      }
+   
+      &__dragArrow {
+         bottom: 5.25rem;
+         right: 5.4rem;
+         width: 3rem;
+         transform: rotate(-80deg);
+      }
+   }
+}
+
+@media screen and (max-width: 760px) {
+   .UI {
+      &__question {
+         margin-top: 2rem;
+         font-size: 3rem;
+      }
+      
+      &__answer {
+         // top: 10%;
+         font-size: 2.25rem;
+      }
+   
    }
 }

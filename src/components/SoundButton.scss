@@ -30,10 +30,6 @@
       width: 3.8rem;
       display: flex;
       padding: .1rem;
-
-      &--active {
-         // border: solid 1px var(--active-color);
-      }
    }
 
    &__circle {
@@ -45,5 +41,12 @@
          fill: var(--active-color);
          margin-left: 18px;
       }
+   }
+}
+
+@media screen and (max-width: 820px) {
+   .SoundButton {
+      bottom: 2.5rem;
+      left: 2rem;
    }
 }
