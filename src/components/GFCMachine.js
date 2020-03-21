@@ -125,12 +125,20 @@ export default function GFCMachine(props) {
 
 
   const sphereRotVal = () => {
-    console.log('sphereRotVal', props.selections);
-    if(props.selections.every(s => s !== 'good')) {
+    //HACK I don't know why I have to do this but putting this default spin
+    //masks the fact that the init constant spin doesn't seemlessly animate
+    //into the Spring animation when the first 2 selections are made.
+    //Whithout this, the first 2 selections just pops to some selections.
+    //See never/always comments below
+    if (props.selections.length < 2) {
+      return 5;
+    }
+
+    if(props.selections.every(s => s !== 'good')) { //never animates on first selection (wtf?)
         return Math.PI/1.5;
     } else if(props.selections.every(s => s !== 'fast')) {
         return 0;
-    } else if(props.selections.every(s => s !== 'cheap')) {
+    } else if(props.selections.every(s => s !== 'cheap')) { //always animates on first selection (wtf?)
         return -Math.PI/1.5;
     } 
   }
