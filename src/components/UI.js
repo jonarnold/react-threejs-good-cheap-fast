@@ -13,6 +13,7 @@ export default ({toggleSound, allowSound, selections }) => {
       from: { transform: 'translate3d(0,-10px,0)', opacity: '0' },
       enter: { transform: 'translate3d(0,0px,0)', opacity: '1' },
       leave: { transform: 'translate3d(0,-10px,0)', opacity: '0' },
+      config: { mass: 1, tension: 120, friction: 14 }
       });
 
    const [modalOpen, setModalOpen] = React.useState(false);
@@ -25,7 +26,7 @@ export default ({toggleSound, allowSound, selections }) => {
    const style = useSpring({ 
       to: {opacity: 1}, 
       from: {opacity: 0},
-      config: { mass: 1, tension: 280, friction: 60 }
+      config: { mass: 1, tension: 280, friction: 120 }
    })
 
 
@@ -33,16 +34,17 @@ export default ({toggleSound, allowSound, selections }) => {
       ref.current.map(clearTimeout)
       ref.current = []
       setItems([]);
-      // const ok = getOkPhrase();
-      // ref.current.push(setTimeout(() => setItems([ok, '']), 1000))
       ref.current.push(setTimeout(() => setItems([getResultPhrase()]), 1000))
     }
 
    const getOkPhrase = () => {
       const phrases = [
-         'Ok',  
+         'Ok',
+         'Oookay',  
          'Alrighty', 
-         'Fine'
+         'Alright',
+         'Fine',
+         'Fine',
       ]
       return phrases[Math.floor(Math.random() * phrases.length)];
    }
