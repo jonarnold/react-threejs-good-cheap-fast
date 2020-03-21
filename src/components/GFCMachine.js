@@ -69,9 +69,9 @@ export default function GFCMachine(props) {
   useFrame( ({ clock }) => {
       propeller.current.rotation.y += .4;
       
-      // if(sphere.current !== null && props.selections.length < 2) {
-      //   sphere.current.rotation.y += .04;
-      // }
+      if(sphere.current !== null && props.selections.length < 2) {
+        sphere.current.rotation.y += .04;
+      }
 
       outerGroup.current.position.y = Math.sin(clock.getElapsedTime() * 1.1) * .057 + 0.1;
       outerGroup.current.position.x = Math.sin(clock.getElapsedTime() * 1.5) * .05;
