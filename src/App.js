@@ -7,6 +7,7 @@ import GFCMachine from './components/GFCMachine'
 import Effects from './components/Effects'
 import './styles.css'
 import UI from './components/UI';
+import UISecondary from './components/UISecondary';
 import Loading from './components/Loading';
 
 export default function App() {
@@ -51,7 +52,8 @@ export default function App() {
   return (
     <div className="App">
       {!loadUI && <Loading modelLoaded={modelLoaded}/>}
-      {loadUI && <UI selections={selections} allowSound={allowSound} toggleSound={toggleSound}/>}
+      {loadUI && <UI selections={selections}/>}
+      
       
       <div className="App__canvas">
         <Canvas
@@ -80,7 +82,9 @@ export default function App() {
             <PropellerSound allowSound={allowSound} url="audio/propeller.ogg"/>
           </Suspense>
         </Canvas>
+        
       </div>
+      {loadUI && <UISecondary allowSound={allowSound} toggleSound={toggleSound}/>}
     </div>
   )
 }

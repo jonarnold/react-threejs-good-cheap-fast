@@ -1,0 +1,61 @@
+.UISecondary {
+
+   &__about-link {
+      position: absolute;
+      bottom: 3.5rem;
+      left: 15rem;
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--default-color);
+      font-family: inherit;
+      font-size: 1.3rem;
+      font-weight: 600;
+      transition: var(--transition-time);
+      cursor: pointer;
+
+      &:hover {
+         color: var(--active-color)
+      }
+   }
+
+   &__dragText {
+      position: absolute;
+      bottom: 3.75rem;
+      right: 2rem;
+      color: var(--default-color);
+      font-family: inherit;
+      font-size: 1.3rem;
+      font-weight: 600;
+   }
+
+   &__dragArrow {
+      position: absolute;
+      opacity: .5;
+      width: 3rem;
+      bottom: 5.95rem;
+      right: 4rem;
+      transform: rotate(-80deg);
+   }
+}
+
+@media screen and (max-width: 820px) {
+   .UISecondary {
+
+      &__about-link {
+         bottom: 3rem;
+         left: 15rem;
+      }
+   
+      &__dragText {
+         bottom: 3.25rem;
+         right: 3rem;
+      }
+   
+      &__dragArrow {
+         bottom: 5.25rem;
+         right: 5.4rem;
+         transform: rotate(-80deg);
+      }
+   }
+}

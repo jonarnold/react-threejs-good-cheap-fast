@@ -1,11 +1,8 @@
 import React, { useRef } from 'react';
 import { useSpring, useTransition, animated } from 'react-spring';
 import './UI.scss';
-import SoundButton from './SoundButton';
-import arrowImg from '../images/arrow-sm.png';
-import About from './About';
 
-export default ({toggleSound, allowSound, selections }) => {
+export default ({ selections }) => {
    
    const ref = useRef([])
    const [ items, setItems ] = React.useState([]);
@@ -15,8 +12,6 @@ export default ({toggleSound, allowSound, selections }) => {
       leave: { transform: 'translate3d(0,-10px,0)', opacity: '0' },
       config: { mass: 1, tension: 120, friction: 14 }
       });
-
-   const [modalOpen, setModalOpen] = React.useState(false);
    
    React.useEffect(() => {
       update();
@@ -69,17 +64,9 @@ export default ({toggleSound, allowSound, selections }) => {
    return (
       <animated.div className="UI" style={style}>
          <h1 className="UI__question">How would you like your project completed?</h1>
-
          {transitions.map(({ item, props, key }) =>
             <animated.div className="UI__answer" key={key} style={props}>{item}</animated.div>
          )}
-
-         <SoundButton allowSound={allowSound} toggleSound={toggleSound}/>
-         <button onClick={() => setModalOpen(true)} className="UI__about-link">About</button>
-         <div className="UI__dragText">Drag to orbit</div>
-         <img className="UI__dragArrow" src={arrowImg} alt=""/>
-
-         <About modalOpen={modalOpen} setModalOpen={setModalOpen} />
       </animated.div>
    )
 }

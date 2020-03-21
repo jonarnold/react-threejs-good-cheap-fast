@@ -3,7 +3,7 @@
    top: 0;
    left: 0;
    width: 50%;
-   height: 100%;
+   height: 50%;
    // border: solid 1px blue;
    color: rgba(255, 255, 255, .9);
    transition: 300ms;
@@ -17,7 +17,7 @@
    
    &__answer {
       position: absolute;
-      top: 50%;
+      bottom: 0%;
       font-size: 3.2rem;
       font-weight: 300;
 
@@ -27,42 +27,7 @@
       }
    }
 
-   &__about-link {
-      position: absolute;
-      bottom: 3.5rem;
-      left: 15rem;
-      background: none;
-      border: none;
-      outline: none;
-      color: var(--default-color);
-      font-family: inherit;
-      font-size: 1.3rem;
-      font-weight: 600;
-      transition: var(--transition-time);
-      cursor: pointer;
-
-      &:hover {
-         color: var(--active-color)
-      }
-   }
-
-   &__dragText {
-      position: absolute;
-      bottom: 3.75rem;
-      right: 0;
-      color: var(--default-color);
-      font-family: inherit;
-      font-size: 1.3rem;
-      font-weight: 600;
-   }
-
-   &__dragArrow {
-      position: absolute;
-      bottom: 4rem;
-      right: -3.5rem;
-      opacity: .5;
-      width: 3rem;
-   }
+   
 }
 
 @media screen and (max-width: 1200px) {
@@ -73,7 +38,6 @@
       }
       
       &__answer {
-         top: 50%;
          font-size: 3rem;
       }
    }
@@ -94,8 +58,10 @@
 
 @media screen and (max-width: 820px) {
    .UI {
+      height: auto;
       width: 100%;
       padding: 1rem;
+      z-index: 999;
 
       &__question {
          text-align: center;
@@ -107,23 +73,6 @@
          position: static;
          text-align: center;
          width: 100%
-      }
-
-      &__about-link {
-         bottom: 3rem;
-         left: 15rem;
-      }
-   
-      &__dragText {
-         bottom: 3.25rem;
-         right: 3rem;
-      }
-   
-      &__dragArrow {
-         bottom: 5.25rem;
-         right: 5.4rem;
-         width: 3rem;
-         transform: rotate(-80deg);
       }
    }
 }
