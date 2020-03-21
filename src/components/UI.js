@@ -33,34 +33,34 @@ export default ({toggleSound, allowSound, selections }) => {
       ref.current.map(clearTimeout)
       ref.current = []
       setItems([]);
-      const ok = getOkPhrase();
-      ref.current.push(setTimeout(() => setItems([ok, '']), 1000))
-      ref.current.push(setTimeout(() => setItems([ok, getResultPhrase()]), 1300))
+      // const ok = getOkPhrase();
+      // ref.current.push(setTimeout(() => setItems([ok, '']), 1000))
+      ref.current.push(setTimeout(() => setItems([getResultPhrase()]), 1000))
     }
 
    const getOkPhrase = () => {
-      if(selections.length === 0) {
-         return 'Select any two...';
-      } else if (selections.length === 1) {
-         return 'Ok, select one more...';
-      } 
-   
-      const phrases = ['Ok', 'Got it', 'Check', 'Roger that', 'Understood', 'Very good', 'Fine', 'Alrighty', 'Gotcha', 'Right on', 'Very well', 'Noted', 'Fine', 'Good choices' ]
-      return phrases[Math.floor(Math.random() * phrases.length)] + '.';
+      const phrases = [
+         'Ok',  
+         'Alrighty', 
+         'Fine'
+      ]
+      return phrases[Math.floor(Math.random() * phrases.length)];
    }
 
    const getResultPhrase = () => {
 
-      if(selections.length < 2) {
-         return;
-      }
+      if(selections.length === 0) {
+         return <span>Select any two...</span>;
+      } else if (selections.length === 1) {
+         return <span>Select one more...</span>;
+      } 
 
       if(selections.every(s => s !== 'good')) {
-         return <span>It will be <span className="UI__answer--strong">poo</span>.</span>;
+         return <span>{getOkPhrase()}, but it will be <span className="UI__answer--strong">poo</span>.</span>;
       } else if(selections.every(s => s !== 'fast')) {
-         return <span>It will <span className="UI__answer--strong">take a while</span>.</span>;
+         return <span>{getOkPhrase()}, but it will <span className="UI__answer--strong">take a while</span>.</span>;
       } else if(selections.every(s => s !== 'cheap')) {
-         return <span>It will be <span className="UI__answer--strong">expensive</span>.</span>
+         return <span>{getOkPhrase()}, but it will be <span className="UI__answer--strong">expensive</span>.</span>
       }
    }
    

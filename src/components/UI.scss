@@ -11,15 +11,16 @@
 
    &__question {
       margin-top: 10rem;
-      margin-bottom: 13rem;
       font-size: 4.2rem;
       font-weight: 300;
+      // margin-bottom: 25rem;
    }
    
    &__answer {
+      position: absolute;
+      top: 50%;
       font-size: 3.2rem;
       font-weight: 300;
-      margin-top: 6rem;
 
       &--strong {
          font-weight: 700;
