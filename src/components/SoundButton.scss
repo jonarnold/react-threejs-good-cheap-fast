@@ -5,8 +5,8 @@
    bottom: 3rem;
    display: block;
    outline: none; //may god have mercy on my soul
-   width: 100px;
-   height: 30px;
+   width: 10rem;
+   height: 4.4rem;
    cursor: pointer;
    border: none;
    background: none;
@@ -22,11 +22,11 @@
    &__label {
       font-size: 1.3rem;
       font-weight: 600;
-      margin-right: 8px;
+      margin-right: .8rem;
    }
 
    &__pill {
-      border: solid 1px var(--default-color);
+      border: solid .1rem var(--default-color);
       border-radius: 2rem;
       width: 3.8rem;
       display: flex;
@@ -40,14 +40,20 @@
 
       &--active {
          fill: var(--active-color);
-         margin-left: 18px;
+         margin-left: 1.8rem;
       }
+   }
+}
+
+@media screen and (max-width: 900px) {
+   .SoundButton {
+      bottom: 2rem;
+      left: 2rem;
    }
 }
 
 @media screen and (max-width: 820px) {
    .SoundButton {
-      bottom: 2.5rem;
-      left: 2rem;
+      bottom: 1.0rem;
    }
 }
