@@ -31,9 +31,9 @@ export default ({modalOpen, setModalOpen}) => {
                <h1 className="About__title About__animation">An experiment in...</h1>
                <div className="About__body About__animation">
                   <ul>
-                     <li>3D modeling with <a href="https://www.blender.org/" target="_blank" rel="noreferrer noopener">Blender</a></li>
+                     <li>3D modeling using <a href="https://www.blender.org/" target="_blank" rel="noreferrer noopener">Blender</a></li>
                      <li>3D in the browser using <a href="https://threejs.org/" target="_blank" rel="noreferrer noopener">ThreeJS</a>, <a href="https://github.com/react-spring/react-three-fiber" target="_blank" rel="noreferrer noopener">react-three-fiber</a></li>
-                     <li>A responsive React front end</li>
+                     <li>Responsive React front-end</li>
                      <li>React transtions and animation using <a href="https://www.react-spring.io/" target="_blank" rel="noreferrer noopener">React Spring</a></li>
                   </ul>
                </div>
