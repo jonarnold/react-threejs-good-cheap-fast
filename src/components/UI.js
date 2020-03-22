@@ -49,7 +49,7 @@ export default ({ selections }) => {
       if(selections.length === 0) {
          return <span>Select any two...</span>;
       } else if (selections.length === 1) {
-         return <span>Select one more...</span>;
+         return <span>Ok, select one more...</span>;
       } 
 
       if(selections.every(s => s !== 'good')) {

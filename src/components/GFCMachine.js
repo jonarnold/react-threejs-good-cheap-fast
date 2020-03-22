@@ -76,7 +76,7 @@ export default function GFCMachine(props) {
       outerGroup.current.position.y = Math.sin(clock.getElapsedTime() * 1.1) * .057 + 0.1;
       outerGroup.current.position.x = Math.sin(clock.getElapsedTime() * 1.5) * .05;
       outerGroup.current.position.z = Math.sin(clock.getElapsedTime() * 1.3) * .05;
-      outerGroup.current.rotation.y = -Math.sin(clock.getElapsedTime() * .25) * .3 - 1.60; //speed, amount, rotation tweak
+      outerGroup.current.rotation.y = -Math.sin(clock.getElapsedTime() * .25) * .25 - 1.60; //speed, amount, rotation tweak
     }
   )
 
