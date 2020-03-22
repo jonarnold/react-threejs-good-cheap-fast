@@ -1,14 +1,14 @@
 import { useMemo, useEffect } from 'react'
-import { useLoader, useThree, useFrame } from 'react-three-fiber'
+import { useThree, useFrame } from 'react-three-fiber'
 import {
-  SMAAImageLoader,
+  // SMAAImageLoader,
   BlendFunction,
   KernelSize,
   BloomEffect,
   EffectComposer,
   EffectPass,
   RenderPass,
-  SMAAEffect,
+  // SMAAEffect,
   GammaCorrectionEffect
 } from 'postprocessing'
 

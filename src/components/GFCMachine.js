@@ -45,7 +45,7 @@ function playRandomServo() {
   }
 }
 
-export default function GFCMachine(props) {
+export default function GFCMachine({selections, allowSound, setModelLoaded, setNewSelection}) {
   const group = useRef();
   const outerGroup = useRef();
   const { nodes, materials } = useLoader(GLTFLoader, 'gfc-hq.glb', loader => {
@@ -59,7 +59,7 @@ export default function GFCMachine(props) {
 
   //Start CSS
   React.useEffect(() => {
-      props.setModelLoaded(true);
+      setModelLoaded(true);
   }, []);
 
   const [propellerTex] = useLoader(THREE.TextureLoader, [propellerImg])
@@ -69,7 +69,7 @@ export default function GFCMachine(props) {
   useFrame( ({ clock }) => {
       propeller.current.rotation.y += .4;
       
-      if(sphere.current !== null && props.selections.length < 2) {
+      if(sphere.current !== null && selections.length < 2) {
         sphere.current.rotation.y += .04;
       }
 
@@ -82,20 +82,20 @@ export default function GFCMachine(props) {
 
   const handleClick = (id) => { 
     if(!isActive(id)){
-      if(props.allowSound){
+      if(allowSound){
         playRandomServo();
         playAudio(buttonSound, 1, false);
       }
-      props.setNewSelection(id);
+      setNewSelection(id);
     } else {
-      if(props.allowSound){
+      if(allowSound){
         playAudio(buttonInactiveSound, 1, false);
       }
     }
   }
   
   const isActive = (selection) => {
-    return props.selections.includes(selection)
+    return selections.includes(selection)
   }
 
   const [initLights, setInitLights] = useState(['good', 'fast', 'cheap']);
@@ -104,11 +104,11 @@ export default function GFCMachine(props) {
   useEffect(() => {
     let interval;
     window.clearInterval(interval);
-    if(props.selections.length === 2) {
+    if(selections.length === 2) {
       window.clearInterval(interval);
       setInitLights([]);
     } else {
-      const filteredInitLights = initLights.filter(i => i !== props.selections[0])
+      const filteredInitLights = initLights.filter(i => i !== selections[0])
       interval = window.setInterval(() => {
         setInitLightsIdx(idx => (idx + 1) % filteredInitLights.length);
       }, 700)
@@ -116,7 +116,7 @@ export default function GFCMachine(props) {
     }
 
     return () => window.clearInterval(interval);
-  }, [props.selections])
+  }, [selections])
 
 
   const isInitActive = (selection) => {
@@ -130,15 +130,15 @@ export default function GFCMachine(props) {
     //into the Spring animation when the first 2 selections are made.
     //Whithout this, the first 2 selections just pops to some selections.
     //See never/always comments below
-    if (props.selections.length < 2) {
+    if (selections.length < 2) {
       return 5;
     }
 
-    if(props.selections.every(s => s !== 'good')) { //never animates on first selection (wtf?)
+    if(selections.every(s => s !== 'good')) { //never animates on first selection (wtf?)
         return Math.PI/1.5;
-    } else if(props.selections.every(s => s !== 'fast')) {
+    } else if(selections.every(s => s !== 'fast')) {
         return 0;
-    } else if(props.selections.every(s => s !== 'cheap')) { //always animates on first selection (wtf?)
+    } else if(selections.every(s => s !== 'cheap')) { //always animates on first selection (wtf?)
         return -Math.PI/1.5;
     } 
   }
@@ -179,12 +179,10 @@ export default function GFCMachine(props) {
   return (
     <a.group 
       ref={outerGroup} 
-      {...props} 
       dispose={null} 
     > 
       <a.group 
         ref={group} 
-        {...props} 
         dispose={null} 
         position = {machineY.interpolate(y => [0, y, 0])} 
       > 
@@ -267,7 +265,7 @@ export default function GFCMachine(props) {
 
 
           {/* SPHERE */}
-          {props.selections.length === 2
+          {selections.length === 2
           ?
             <a.mesh ref={sphere}
               material={materials['gfc main']} 

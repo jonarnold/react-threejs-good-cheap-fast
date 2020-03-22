@@ -12,7 +12,7 @@ import Loading from './components/Loading';
 
 export default function App() {
   // Controls disable pointerevents on movement to save some CPU cost
-  const [active, set] = useState(false);
+  // const [active, set] = useState(false);
   const [allowSound, setAllowSound] = useState(false);
   const [selections, setSelections] = React.useState([])
   const [modelLoaded, setModelLoaded] = React.useState(false);
@@ -58,7 +58,7 @@ export default function App() {
       <div className="App__canvas">
         <Canvas
           concurrent
-          noEvents={active}
+          noEvents={false}
           pixelRatio={window.devicePixelRatio}
           camera={{ position: [0, 0, 2.5], fov: 69 }}
           gl={{ antialias: true }}
