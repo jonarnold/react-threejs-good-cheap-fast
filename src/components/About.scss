@@ -1,58 +1,74 @@
 .About {
-   height: 100vh;
+   display: grid;
+   grid-template-columns: auto 1fr;
+   grid-template-rows: 6.4rem 1fr;
+   outline: none;
+   position: relative;
+   background-color: #FFF;
+   max-width: 70rem;
+   margin: 4rem;
+   padding: 2.4rem;
+   box-shadow: 0 20px 40px rgba(0, 0, 0, .05);
+
    color: #4E4E4E;
    z-index: 9999;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   outline: none;
-   text-align: center;
 
    animation: open .3s;
    animation-fill-mode: backwards;
 
-   &__card {
-      position: relative;
-      background-color: #FFF;
-      margin: 4rem;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, .05);
-   }
-
-   &__outline {
-      // display: flex;
-      // flex-direction: column;
-      // justify-content: center;
-      // align-items: center;
-      // margin: 1rem;
-      // border: 1px dashed rgba(0, 44, 95, .4);
-      padding: 3rem;
-      max-width: 70rem;
-   }
-
    &__icon {
-      width: 11rem;
-       height: 11rem;
-       margin-bottom: 2rem;
-       margin-top: 1rem;
-       animation-delay: .5s !important;
-      //  border: 5px solid #fff;
-      //  box-shadow: 0 3px 15px rgba(0, 0, 0, .1);
-       border-radius: 200px;
+      grid-column: 1 / 2;
+      grid-row: 1 / -1;
+      width: 6.4rem;
+      height: 6.4rem;
+      animation-delay: .5s !important;
+      border: 2px solid #fff;
+      box-shadow:  0 2px 4px rgba(0, 0, 0, .15);
+      border-radius: 200px;
    }
 
    &__title {
       color: #5f656b;
-      font-size: 3.3rem;
-      margin-bottom: 1.5rem;
-      font-weight: normal;
+      font-size: 3rem;
+      display: block;
+      margin: 0;
+      padding: 0;
+      padding-top: 1.5rem;
+      padding-left: 2.4rem;
+      padding-right: 2.4rem;
+      font-weight: 300;
       animation-delay: .75s !important;
    }
 
    &__body {
-      font-size: 2.1rem;
+      margin: 0;
+      padding: 0;
+      margin-top: 2.1rem;
+      font-weight: 500;
+      font-size: 1.8rem;
       line-height: 2.5rem;
-      margin-bottom: 2.5rem;
       animation-delay: 1s !important;
+      & ul {
+         margin: 0;
+         padding: 0;
+         padding-left: 4.5rem;
+         padding-right: 4.5rem;
+         
+         & li {
+            margin-bottom: 2.4rem;
+
+            & a {
+               color: #1B51B9;
+               text-decoration: none;
+               transition: 200ms;
+               border-bottom: solid 2px transparent;
+
+               &:hover {
+                  border-bottom: solid 2px #367BFF;
+               }
+            }
+         }
+      }
    }
 
    &__animation {
@@ -84,79 +100,123 @@
 }
 
 
-
- @keyframes fadeIn {
-   from { 
-      transform: translateY(-7px);
-      opacity: 0;
-   }
-   to   { 
-      transform: translateY(0px);
-      opacity: 1;
-   }
- }
-
- @keyframes open {
-   from { 
-      transform: scale(.9);
-      opacity: 0;
-   }
-   to   { 
-      transform: scale(1);
-      opacity: 1;
-   }
- }
-
- @keyframes close {
-   from { 
-      transform: scale(1);
-      opacity: 0;
-   }
-   to   { 
-      transform: scale(.9);
-      opacity: 1;
-   }
- }
-
- @media screen and (max-width: 430px) {
-   .About__outline {
-      padding: 1rem;
-   }
-
-   .About__icon {
-      width: 10rem;
-       height: 10rem;
-   }
-
-   .About__card {
-      margin: 1rem;
-   }
-
-   .About__body {
-      line-height: 2.5rem;
-   }
-
-   .About__signature {
-      display: none;
-   }
-}
-
-@media screen and (max-width: 370px) {
-   .About__icon {
-      width: 8rem;
-       height: 8rem;
-   }
-
-   .About__outline {
-      padding: 1rem;
-   }
-
-   .About__title {
-      font-size: 2.5rem;
-   }
+@media screen and (max-width: 535px) {
+   .About {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 6.4rem 4.8rem 1fr;
+      margin: 2rem;
+      padding: 2rem;
+      
+      &__icon {
+         grid-column: 1 / 2;
+         grid-row: 1 / 2;
+         width: 6.4rem;
+         height: 6.4rem;
+      }
    
-   .About__body {
-      font-size: 1.8rem;
-      line-height: 2.1rem;
+      &__title {
+         color: #5f656b;
+         font-size: 3rem;
+         display: block;
+         margin: 0;
+         padding: 0;
+         margin-top: 2rem;
+      }
+   
+      &__body {
+         margin: 0;
+         padding: 0;
+         margin-top: 3rem;
+         font-weight: 500;
+         font-size: 1.8rem;
+         line-height: 2.5rem;
+         animation-delay: 1s !important;
+         & ul {
+            margin: 0;
+            padding: 0;
+            padding-left: 2rem;
+            
+            & li {
+               margin-bottom: 2rem;
+   
+               & a {
+                  color: #1B51B9;
+                  text-decoration: none;
+                  transition: 200ms;
+                  border-bottom: solid 2px transparent;
+   
+                  &:hover {
+                     border-bottom: solid 2px #367BFF;
+                  }
+               }
+            }
+         }
+      }
    }
 }
+
+
+
+
+
+
+@keyframes fadeIn {
+from { 
+   transform: translateY(-7px);
+   opacity: 0;
+}
+to   { 
+   transform: translateY(0px);
+   opacity: 1;
+}
+}
+
+@keyframes open {
+from { 
+   transform: scale(.9);
+   opacity: 0;
+}
+to   { 
+   transform: scale(1);
+   opacity: 1;
+}
+}
+
+@keyframes close {
+from { 
+   transform: scale(1);
+   opacity: 0;
+}
+to   { 
+   transform: scale(.9);
+   opacity: 1;
+}
+}
+
+//  @media screen and (max-width: 430px) {
+//    .About__icon {
+//       width: 10rem;
+//        height: 10rem;
+//    }
+
+//    .About__body {
+//       line-height: 2.5rem;
+//    }
+// }
+
+// @media screen and (max-width: 370px) {
+//    .About__icon {
+//       width: 8rem;
+//       height: 8rem;
+//    }
+
+//    .About__title {
+//       font-size: 2.5rem;
+//    }
+   
+//    .About__body {
+//       font-size: 1.8rem;
+//       line-height: 2.1rem;
+//    }
+// }
