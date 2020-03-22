@@ -15,6 +15,7 @@
       position: relative;
       background-color: #FFF;
       margin: 4rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, .05);
    }
 
    &__outline {
@@ -62,19 +63,20 @@
 
 .About .close {
    position: absolute;
-   top: 1.5rem;
-   right: 1.5rem;
+   top: 1rem;
+   right: 1rem;
    border: none;
    background: none;
    outline: none;
-   width: 4rem;
-   height: 3.2rem;
+   width: 5rem;
+   height: 5rem;
    font-size: 3rem;
    line-height: 0rem;
    display: block;
    cursor: pointer;
    font-family: sans-serif;
    color: #93989e;
+   transition: 200ms;
 }
 
 .About .close:hover {

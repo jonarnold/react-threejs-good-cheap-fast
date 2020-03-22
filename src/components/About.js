@@ -26,17 +26,17 @@ export default ({modalOpen, setModalOpen}) => {
          >
          <Fade in={modalOpen}>
             <div className="About">
-               <div onClick={() => setModalOpen(false)} className="About__card">
+               <div className="About__card">
                   <button onClick={() => setModalOpen(false)} className="close">&times;</button>
                   <div className="About__outline">
                      <img className="About__icon About__animation" src={jonImg} alt="Jon Arnold"/>
                      <h1 className="About__title About__animation">An experiment in:</h1>
                      <div className="About__body About__animation">
                         <ul>
-                           <li>3D modeling and texturing in Blender</li>
-                           <li>3D animation in mobile and desktop browsers</li>
-                           <li>React front-end</li>
-                           <li>Responsive CSS</li>
+                           <li>3D modeling (<a href="https://www.blender.org/" target="_blank" rel="noreferrer noopener">Blender</a>)</li>
+                           <li>3D in the browser -- mobile too! (<a href="https://threejs.org/" target="_blank" rel="noreferrer noopener">ThreeJS</a>, <a href="https://github.com/react-spring/react-three-fiber" target="_blank" rel="noreferrer noopener">react-three-fiber</a>)</li>
+                           <li>Responsive <a href="#">LINK TEST</a>React front end</li>
+                           <li>React transtions and animation (<a href="https://www.react-spring.io/" target="_blank" rel="noreferrer noopener">React Spring</a>)</li>
                         </ul>
                      </div>
                      

@@ -181,7 +181,6 @@ export default function GFCMachine(props) {
       ref={outerGroup} 
       {...props} 
       dispose={null} 
-      
     > 
       <a.group 
         ref={group} 

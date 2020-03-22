@@ -16,7 +16,7 @@ export default function App() {
   const [allowSound, setAllowSound] = useState(false);
   const [selections, setSelections] = React.useState([])
   const [modelLoaded, setModelLoaded] = React.useState(false);
-  const [loadUI, setLoadUI] = React.useState(false);
+  const [loadUI, setLoadUI] = React.useState(true);
 
   React.useEffect(() => {
     if(modelLoaded){
@@ -56,7 +56,7 @@ export default function App() {
       
       
       <div className="App__canvas">
-        <Canvas
+        {/* <Canvas
           concurrent
           noEvents={active}
           pixelRatio={window.devicePixelRatio}
@@ -81,7 +81,7 @@ export default function App() {
             <Effects />
             <PropellerSound allowSound={allowSound} url="audio/propeller.ogg"/>
           </Suspense>
-        </Canvas>
+        </Canvas> */}
         
       </div>
       {loadUI && <UISecondary allowSound={allowSound} toggleSound={toggleSound}/>}

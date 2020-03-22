@@ -12,9 +12,9 @@
             xmlns:xmpDM="http://ns.adobe.com/xmp/1.0/DynamicMedia/">
          <xmp:CreatorTool>Adobe Audition 13.0 (Macintosh)</xmp:CreatorTool>
          <xmp:CreateDate>2020-03-03T18:35:51-05:00</xmp:CreateDate>
-         <xmp:MetadataDate>2020-03-04T19:47:31-05:00</xmp:MetadataDate>
-         <xmp:ModifyDate>2020-03-04T19:47:31-05:00</xmp:ModifyDate>
-         <xmpMM:InstanceID>xmp.iid:29069a54-81e7-4420-b2f2-5655f60ec234</xmpMM:InstanceID>
+         <xmp:MetadataDate>2020-03-21T19:15:42-04:00</xmp:MetadataDate>
+         <xmp:ModifyDate>2020-03-21T19:15:42-04:00</xmp:ModifyDate>
+         <xmpMM:InstanceID>xmp.iid:96c22832-aca1-4698-8b22-150d70a06464</xmpMM:InstanceID>
          <xmpMM:DocumentID>xmp.did:29069a54-81e7-4420-b2f2-5655f60ec234</xmpMM:DocumentID>
          <xmpMM:OriginalDocumentID>xmp.did:3bcc9fb1-277e-4cc3-920d-a7ab9c1b0d08</xmpMM:OriginalDocumentID>
          <xmpMM:History>
@@ -79,6 +79,20 @@
                   <stEvt:action>saved</stEvt:action>
                   <stEvt:instanceID>xmp.iid:29069a54-81e7-4420-b2f2-5655f60ec234</stEvt:instanceID>
                   <stEvt:when>2020-03-04T19:47:31-05:00</stEvt:when>
+                  <stEvt:softwareAgent>Adobe Audition 13.0 (Macintosh)</stEvt:softwareAgent>
+                  <stEvt:changed>/</stEvt:changed>
+               </rdf:li>
+               <rdf:li rdf:parseType="Resource">
+                  <stEvt:action>saved</stEvt:action>
+                  <stEvt:instanceID>xmp.iid:0630047b-f8e0-4c7e-ba6b-0880e74965b1</stEvt:instanceID>
+                  <stEvt:when>2020-03-21T19:15:42-04:00</stEvt:when>
+                  <stEvt:softwareAgent>Adobe Audition 13.0 (Macintosh)</stEvt:softwareAgent>
+                  <stEvt:changed>/metadata</stEvt:changed>
+               </rdf:li>
+               <rdf:li rdf:parseType="Resource">
+                  <stEvt:action>saved</stEvt:action>
+                  <stEvt:instanceID>xmp.iid:96c22832-aca1-4698-8b22-150d70a06464</stEvt:instanceID>
+                  <stEvt:when>2020-03-21T19:15:42-04:00</stEvt:when>
                   <stEvt:softwareAgent>Adobe Audition 13.0 (Macintosh)</stEvt:softwareAgent>
                   <stEvt:changed>/</stEvt:changed>
                </rdf:li>
