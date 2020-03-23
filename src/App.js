@@ -79,7 +79,8 @@ export default function App() {
               setModelLoaded = {setModelLoaded}
             />
             <Effects />
-            <PropellerSound allowSound={allowSound} url="audio/propeller.ogg"/>
+            {/* This won't load the ogg file in Safari! */}
+            <PropellerSound allowSound={allowSound} url="audio/propeller.ogg"/> 
           </Suspense>
         </Canvas>
         
