@@ -30,7 +30,7 @@ function playAudio(audio, volume = 1, loop = false) {
 }
 
 function playRandomServo() {
-  const vol = .73;
+  const vol = .75;
   const rand = Math.floor(Math.random() * 3) + 1;
 
   switch(rand) {
@@ -171,7 +171,7 @@ export default function GFCMachine({selections, allowSound, setModelLoaded, setN
 
   const {machineY} = useSpring({
     to: {machineY: 0},
-    from: {machineY: 3},
+    from: {machineY: 3.2},
     delay: 500,
     config: { mass: 1, tension: 280, friction: 120 }
   })

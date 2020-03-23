@@ -9,6 +9,7 @@ import './styles.css'
 import UI from './components/UI';
 import UISecondary from './components/UISecondary';
 import Loading from './components/Loading';
+import propellerAudio from './audio/propeller.ogg';
 
 export default function App() {
   // Controls disable pointerevents on movement to save some CPU cost
@@ -79,10 +80,7 @@ export default function App() {
             />
             <Effects />
           </Suspense>
-          {/* Doesn't work in Safari! */}
-          <Suspense fallback={null}>
-            {allowSound && <PropellerSound url="/audio/propeller.ogg"/>}
-          </Suspense>
+          
         </Canvas>
         
       </div>
@@ -91,26 +89,34 @@ export default function App() {
   )
 }
 
+const propellerSound = new Audio(propellerAudio);
 
-const PropellerSound = ({ url }) => {
-  const sound = useRef()
-  const { camera } = useThree()
-  const [listener] = useState(() => new THREE.AudioListener())
-  const buffer = useLoader(THREE.AudioLoader, url);
-  useEffect(() => {
-    sound.current.setBuffer(buffer)
-    sound.current.setRefDistance(1)
-    sound.current.setLoop(true)
-    sound.current.play()
-    camera.add(listener)
-    console.log('tryna play');
-    return () => {
-      if(sound.current.isPlaying) {
-        sound.current.stop()
-      }
-      camera.remove(listener);
-      console.log('NO SOUNDS FOR YOU');
-    }
-  }, [])
-  return <positionalAudio ref={sound} args={[listener]} />
+const PropellerSound = () => {
+  propellerSound.currentTime = 0;
+  propellerSound.volume = 1;
+  propellerSound.loop = true;
+  propellerSound.play();
 }
+
+// const PropellerSound = ({ url }) => {
+//   const sound = useRef()
+//   const { camera } = useThree()
+//   const [listener] = useState(() => new THREE.AudioListener())
+//   const buffer = useLoader(THREE.AudioLoader, url);
+//   useEffect(() => {
+//     sound.current.setBuffer(buffer)
+//     sound.current.setRefDistance(1)
+//     sound.current.setLoop(true)
+//     sound.current.play()
+//     camera.add(listener)
+//     console.log('tryna play');
+//     return () => {
+//       if(sound.current.isPlaying) {
+//         sound.current.stop()
+//       }
+//       camera.remove(listener);
+//       console.log('NO SOUNDS FOR YOU');
+//     }
+//   }, [])
+//   return <positionalAudio ref={sound} args={[listener]} />
+// }
