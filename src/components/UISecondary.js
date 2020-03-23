@@ -12,7 +12,7 @@ export default ({ toggleSound, allowSound }) => {
    const style = useSpring({ 
       to: {opacity: 1}, 
       from: {opacity: 0},
-      delay: 2000,
+      delay: 1500,
       config: { mass: 1, tension: 280, friction: 120 }
    })
 

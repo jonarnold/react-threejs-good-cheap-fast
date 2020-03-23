@@ -27,7 +27,6 @@ export default function App() {
   }, [modelLoaded])
 
   const toggleSound = () => {
-    console.log('toggle sound');
     setAllowSound(s => !s);
   }
 
@@ -79,8 +78,10 @@ export default function App() {
               setModelLoaded = {setModelLoaded}
             />
             <Effects />
-            {/* This won't load the ogg file in Safari! */}
-            <PropellerSound allowSound={allowSound} url="audio/propeller.ogg"/> 
+          </Suspense>
+          {/* Doesn't work in Safari! */}
+          <Suspense fallback={null}>
+            {allowSound && <PropellerSound url="/audio/propeller.ogg"/>}
           </Suspense>
         </Canvas>
         
@@ -91,25 +92,25 @@ export default function App() {
 }
 
 
-const PropellerSound = ({ url, allowSound }) => {
+const PropellerSound = ({ url }) => {
   const sound = useRef()
   const { camera } = useThree()
   const [listener] = useState(() => new THREE.AudioListener())
-  const buffer = useLoader(THREE.AudioLoader, url)
+  const buffer = useLoader(THREE.AudioLoader, url);
   useEffect(() => {
-    if(allowSound) {
-      sound.current.setBuffer(buffer)
-      sound.current.setRefDistance(1)
-      sound.current.setLoop(true)
-      sound.current.play()
-      camera.add(listener)
-    } else { 
+    sound.current.setBuffer(buffer)
+    sound.current.setRefDistance(1)
+    sound.current.setLoop(true)
+    sound.current.play()
+    camera.add(listener)
+    console.log('tryna play');
+    return () => {
       if(sound.current.isPlaying) {
         sound.current.stop()
       }
-      camera.remove(listener)
-    } 
-    return () => camera.remove(listener)
-  }, [allowSound])
+      camera.remove(listener);
+      console.log('NO SOUNDS FOR YOU');
+    }
+  }, [])
   return <positionalAudio ref={sound} args={[listener]} />
 }
