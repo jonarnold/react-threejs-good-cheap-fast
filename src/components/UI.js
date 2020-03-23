@@ -47,9 +47,9 @@ export default ({ selections }) => {
    const getResultPhrase = () => {
 
       if(selections.length === 0) {
-         return <span>Select any two...</span>;
+         return <span>Pick any two...</span>;
       } else if (selections.length === 1) {
-         return <span>Ok, select one more...</span>;
+         return <span>Ok, pick one more...</span>;
       } 
 
       if(selections.every(s => s !== 'good')) {
