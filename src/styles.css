@@ -72,14 +72,21 @@ canvas {
 
 @media screen and (max-width: 450px) {
   .App__canvas {
-    padding-top: 10rem;
-    padding-bottom: 8rem;
+    padding-top: 7rem;
+    padding-bottom: 5rem;
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) and (height: 800px){
+  .App__canvas {
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+  }
+}
+
+/* @media screen and (max-width: 400px) {
   .App__canvas {
     padding-top: 15rem;
     padding-bottom: 12rem;
   }
-}
+} */

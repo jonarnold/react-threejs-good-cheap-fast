@@ -143,12 +143,6 @@ export default function GFCMachine({selections, allowSound, setModelLoaded, setN
     } 
   }
 
-  // const sphereInitRotVal = () => {
-  //   console.log('initrot');
-  //   return Math.random() * 10;
-  // }
-
-  //useFrame(({ clock }) => (group.current.rotation.y = Math.sin(clock.getElapsedTime() / 8) * Math.PI))
   
   const {buttonPos1, buttonPos2, buttonPos3} = useSpring({
     buttonPos1: isActive('good') ? -.06 : .06,

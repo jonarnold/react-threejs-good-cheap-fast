@@ -85,8 +85,21 @@
       }
       
       &__answer {
-         // top: 10%;
          font-size: 2.25rem;
+      }
+   
+   }
+}
+
+@media screen and (max-width: 350px) {
+   .UI {
+      &__question {
+         margin-top: 2rem;
+         font-size: 2.5rem;
+      }
+
+      &__answer {
+         font-size: 2rem;
       }
    
    }

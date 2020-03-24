@@ -80,9 +80,11 @@ export default function App() {
             <Effects />
           </Suspense>
           {/* Doesn't work in Safari! */}
+          {allowSound && 
           <Suspense fallback={null}>
-            {allowSound && <PropellerSound url="/audio/propeller.ogg"/>}
+            <PropellerSound url="audio/propeller.ogg"/>
           </Suspense>
+          }
         </Canvas>
         
       </div>
@@ -103,13 +105,11 @@ const PropellerSound = ({ url }) => {
     sound.current.setLoop(true)
     sound.current.play()
     camera.add(listener)
-    console.log('tryna play');
     return () => {
       if(sound.current.isPlaying) {
         sound.current.stop()
       }
       camera.remove(listener);
-      console.log('NO SOUNDS FOR YOU');
     }
   }, [])
   return <positionalAudio ref={sound} args={[listener]} />

@@ -22,7 +22,7 @@
 
    &__dragText {
       position: absolute;
-      bottom: 4.4rem;
+      bottom: 4.38rem;
       right: 2rem;
       color: var(--default-color);
       font-family: inherit;
@@ -48,7 +48,7 @@
       }
    
       &__dragText {
-         bottom: 3.4rem;
+         bottom: 3.38rem;
       }
    
       &__dragArrow {
@@ -62,14 +62,24 @@
 
       &__about-link {
          bottom: 1rem;
+         left: 13rem;
       }
    
       &__dragText {
-         bottom: 2.4rem;
+         bottom: 2.38rem;
       }
    
       &__dragArrow {
          bottom: 4.75rem;
+      }
+   }
+}
+
+
+@media screen and (max-width: 400px) {
+   .UISecondary {
+      &__about-link {
+         bottom: 1rem;
       }
    }
 }

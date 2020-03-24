@@ -1,7 +1,9 @@
 
 .SoundButton {
+   margin:0;
+   padding: 0;
    position: absolute;
-   left: 1rem;
+   left: 2rem;
    bottom: 3rem;
    display: block;
    outline: none; //may god have mercy on my soul
@@ -48,7 +50,6 @@
 @media screen and (max-width: 900px) {
    .SoundButton {
       bottom: 2rem;
-      left: 2rem;
    }
 }
 
