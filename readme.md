@@ -1,3 +1,5 @@
+![](public/good-fast-cheap-social.jpg)
+
 #### An experiment combining React and 3D stuffs: 
 
 <ul>
