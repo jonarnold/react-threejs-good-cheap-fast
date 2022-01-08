@@ -2,7 +2,7 @@
 
 #### An experiment combining React and 3D stuffs: 
 
-http://www.tuitivegroup.com/good-fast-cheap/
+http://jonarnold.dev/good-fast-cheap/
 
 <ul>
    <li>3D modeling using <a href="https://www.blender.org/" target="_blank" rel="noreferrer noopener">Blender</a></li>
